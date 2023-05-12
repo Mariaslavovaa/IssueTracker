@@ -1,10 +1,10 @@
 package com.example.issue_tracker_backend.service;
 
-import com.example.issue_tracker_backend.conversions.TicketConversion;
 import com.example.issue_tracker_backend.model.Ticket;
 import com.example.issue_tracker_backend.repository.TicketRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class TicketServiceImplementation implements TicketService{
 
     private final TicketRepository repository;
