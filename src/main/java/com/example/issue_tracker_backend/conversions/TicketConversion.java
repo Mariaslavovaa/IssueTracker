@@ -10,5 +10,10 @@ public class TicketConversion {
         return new TicketDto(ticket.getId(), ticket.getTitle(), ticket.getStatus(),
                 ticket.getDescription(), ticket.getCreator(), ticket.getDateOfCreation());
     }
+
+    public static Ticket dtoToEntity(TicketDto ticketDto){
+        return new Ticket(ticketDto.getId(), ticketDto.getTitle(), ticketDto.getStatus(),
+                ticketDto.getDescription(), ticketDto.getCreator(), ticketDto.getDateOfCreation());
+    }
 }
 
