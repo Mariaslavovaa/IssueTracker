@@ -1,0 +1,27 @@
+button {
+  top: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.btn-all {
+  left: 2%;
+}
+.btn-project {
+  left: 4%;
+}
+.btn-assign {
+  left: 6%;
+}
+
+.h1 {
+  font-weight: 600;
+  top: 2rem;
+  left: 5%;
+}
+hr {
+  height: 1px;
+  border-width: 0;
+  background-color: #062125;
+}
