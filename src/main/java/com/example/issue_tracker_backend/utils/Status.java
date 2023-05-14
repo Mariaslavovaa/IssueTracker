@@ -1,6 +1,8 @@
 package com.example.issue_tracker_backend.utils;
 
-public enum Status {
+import java.io.Serializable;
+
+public enum Status implements Serializable {
     TO_DO,
     IN_PROGRESS,
     REVIEW,
