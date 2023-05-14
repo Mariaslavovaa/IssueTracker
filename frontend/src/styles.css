@@ -1,0 +1,11 @@
+/* You can add global styles to this file, and also import other style files */
+html {
+  font-family: Raleway;
+  background: rgb(125, 226, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(125, 226, 255, 1) 0%,
+    rgba(156, 207, 243, 1) 35%,
+    rgba(54, 103, 207, 1) 100%
+  );
+}

@@ -1,0 +1,32 @@
+<mat-toolbar>
+  <h1 class="h1">Issue Tracker</h1>
+  <button
+    mat-raised-button
+    class="btn-all"
+    routerLink="/all-issues"
+    routerLinkActive="active"
+    ariaCurrentWhenActive="page"
+  >
+    All Issues
+  </button>
+  <span class="example-spacer"></span>
+  <button
+    mat-raised-button
+    class="btn-project"
+    routerLink="/projects-issues"
+    routerLinkActive="active"
+    ariaCurrentWhenActive="page"
+  >
+    Project Issues
+  </button>
+  <button
+    mat-raised-button
+    class="btn-assign"
+    routerLink="/assignee-issues"
+    routerLinkActive="active"
+    ariaCurrentWhenActive="page"
+  >
+    Assaignee Issues
+  </button>
+</mat-toolbar>
+<hr />
