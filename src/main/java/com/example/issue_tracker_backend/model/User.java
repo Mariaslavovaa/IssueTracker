@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,11 @@ public class User {
     @Column(name = "password", nullable = false)
     String password;
 
+    @Column(name = "email", nullable = false)
+    String email;
+
+
+
     @ManyToMany()
     @JoinTable(
             name = "accessed_project",
@@ -39,9 +45,11 @@ public class User {
     )
     private List<Project> projects = new ArrayList<>();
 
-    public User(String username, String password){
+    public User(String username, String email, String password){
         this.username = username;
+        this.email = email;
         this.password = password;
+
     }
     public void giveAccessToProject(Project project) {
         projects.add(project);
