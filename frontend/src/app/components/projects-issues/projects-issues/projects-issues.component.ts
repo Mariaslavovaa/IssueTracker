@@ -18,7 +18,7 @@ export class ProjectsIssuesComponent {
     {
       id: '2',
       name: 'Project2',
-      todo: ['Go Outside', 'Walk Dog', 'Secret Task'],
+      todo: ['Task1', 'Task2', 'Task5'],
       inprogress: [],
       review: ['Something'],
       done: [],
