@@ -10,17 +10,17 @@ export class AssigneeIssuesComponent {
     {
       id: '123',
       name: 'Ivan Petrov',
-      todo: ['Task1', 'Task2', 'Task3'],
+      todo: ['Issue1:description', 'Issue2', 'Issue3'],
       inprogress: [],
-      review: ['Task10'],
+      review: ['Issue10'],
       done: [],
     },
     {
       id: '543',
       name: 'Georgi Ivanov',
-      todo: ['Task4', 'Task5', 'Task6'],
+      todo: ['Issue4:description', 'Issue5: You need to do....', 'Issue6'],
       inprogress: [],
-      review: ['Task7'],
+      review: ['Issue7: description'],
       done: [],
     },
   ];

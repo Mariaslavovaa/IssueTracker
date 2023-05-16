@@ -10,10 +10,6 @@ import {
   templateUrl: './drop-list.component.html',
   styleUrls: ['./drop-list.component.css'],
 })
-
-/*
- * @title Drag&Drop connected sorting
- */
 export class DropListComponent {
   @Input() todo: string[] = [];
   @Input() inprogress: string[] = [];
