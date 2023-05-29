@@ -1,67 +1,88 @@
 package com.example.issue_tracker_backend.config;
 
-import com.example.issue_tracker_backend.model.Project;
-import com.example.issue_tracker_backend.model.Ticket;
-import com.example.issue_tracker_backend.model.User;
-import com.example.issue_tracker_backend.repository.ProjectRepository;
-import com.example.issue_tracker_backend.repository.TicketRepository;
-import com.example.issue_tracker_backend.repository.UserRepository;
 import com.example.issue_tracker_backend.service.CustomUserDetailsService;
+import com.example.issue_tracker_backend.utils.JwtTokenGenerator;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.util.StringUtils;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 import java.io.IOException;
-import java.time.LocalDate;
+import java.util.Arrays;
 
 @EnableWebSecurity
 @Configuration
+@RequiredArgsConstructor
 public class Security {
 
-    @Autowired
-    private CustomUserDetailsService userDetailService;
+    private final CustomUserDetailsService userDetailService;
+
+    private final JwtTokenGenerator jwtGenerator;
+
+    private final AuthHandlerJwt unauthorizedHandler;
+
+    private final AuthenticationProvider authProvider;
 
     @Bean
     public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
+    private String parseToken(HttpServletRequest request) {
+        String header = request.getHeader("Authorization");
+        if (StringUtils.hasText(header)) {
+            return header;
+        }
+        return null;
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeHttpRequests()
-                .requestMatchers("/registration").permitAll()
-                .requestMatchers("/index").permitAll()
-                .requestMatchers("/secret/**").authenticated().anyRequest().permitAll()
-                .and().formLogin(
-                        from -> from.loginPage("/login")
-                                .loginProcessingUrl("/login")
-                                .defaultSuccessUrl("/secret")
-                                .permitAll()
-                ).logout(logout -> logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout")));
+        http.cors().and().csrf().disable()
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .authenticationProvider(authProvider)
+                .authorizeHttpRequests()
+                .requestMatchers("/secret/**").permitAll()
+                .requestMatchers("/private/api/**").permitAll().anyRequest().authenticated().and();
         http.addFilterBefore(new OncePerRequestFilter() {
             @Override
             protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-                Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-                if (auth != null && auth.isAuthenticated() && !request.getRequestURI().equals("/logout") &&
-                        (request.getRequestURI().equals("/login") || (request.getRequestURI().equals("/registration")))) {
-                    response.sendRedirect("/secret");
+                String jwt = parseToken(request);
+                if (jwt != null) { // && jwtGenerator.validateToken(jwt)) {
+                    String username = jwtGenerator.getUsernameFromToken(jwt);
+
+                    UserDetails user = userDetailService.loadUserByUsername(username);
+                    UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+                            user, null, user.getAuthorities());
+                    auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(auth);
                 }
                 filterChain.doFilter(request, response);
             }
@@ -69,6 +90,23 @@ public class Security {
         return http.build();
     }
 
+    @Bean
+    public CorsFilter corsFilter() {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.setAllowCredentials(true);
+        corsConfiguration.addAllowedOrigin("https://localhost:4200");
+        corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
+        corsConfiguration.setAllowedHeaders(Arrays.asList("Origin", "Access-Control-Allow-Origin", "Content-Type",
+                "Accept", "Authorization", "Origin, Accept", "X-Requested-With",
+                "Access-Control-Request-Method", "Access-Control-Request-Headers"));
+        corsConfiguration.setExposedHeaders(Arrays.asList("Origin", "Content-Type", "Accept", "Authorization",
+                "Access-Control-Allow-Origin", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"));
+
+        UrlBasedCorsConfigurationSource urlBasedConfig = new UrlBasedCorsConfigurationSource();
+        urlBasedConfig.registerCorsConfiguration("/**", corsConfiguration);
+
+        return new CorsFilter(urlBasedConfig);
+    }
 
     @Autowired    //configure login services
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

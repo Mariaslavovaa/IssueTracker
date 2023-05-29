@@ -1,0 +1,19 @@
+<div class="signup-page">
+  <div class="form">
+      <form (ngSubmit)="signup()">
+          <input id="email" type="text" name="email" required [(ngModel)]="form.email" #email="ngModel" placeholder="email"/>
+          <input type="text" [(ngModel)]="form.username" required placeholder="username"/>
+          <input type="password" id="password" [(ngModel)]="form.password" required placeholder="password"/>
+          <i class="fas fa-eye" onclick="show()"></i>
+          <br>
+          <br>
+
+          <button id="submit-btn" type="submit">
+              SIGN UP
+          </button>
+          <div>
+            <p id="error">{{errorMessage}}</p>
+          </div>
+      </form>
+  </div>
+</div>
