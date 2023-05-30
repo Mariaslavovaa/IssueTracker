@@ -32,8 +32,8 @@ export class SignupComponent {
         window.location.assign("/login");
       },
       error: err => {
-        if (err != null && err.error != null && err.error.message != null) {
-          this.errorMessage = err.error.message;
+        if (err != null && err.error != null) {
+          this.errorMessage = err.error;
         } else {
           this.errorMessage = "Error signing up";
         }
