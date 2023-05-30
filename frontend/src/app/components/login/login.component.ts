@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { TokenStorageService } from 'src/app/service/token-service.service';
 
-const api = "localhost:8080/login";
-
+// Move along with the requests to auth service
+const api = "http://localhost:8080/private/api/auth/login";
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -18,23 +19,39 @@ export class LoginComponent {
     username: null,
     password: null
   };
+  isLoggedIn = false;
   success = false;
   errorMessage = "";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private tokenStorage: TokenStorageService) {}
+
+  ngOnInit(): void {
+    this.isLoggedIn = false;
+  }
 
   login() {
     const loginData = { username: this.form.username, password: this.form.password };
     this.http.post(api, loginData, httpOptions).subscribe({
       next: (data : any) => {
-        this.success = true;
-        localStorage.setItem("token", data.token);
-        console.log(data);
-        // this.tokenStorage.saveToken(data.accessToken);
+        this.isLoggedIn = true;
+        this.tokenStorage.saveToken(data.token);
+        this.tokenStorage.saveUser({ username: data.username, email: data.email });
+        window.location.reload();
       },
-      error : err => {
-        console.log(err)
+      error: err => {
+        if (err != null && err.error != null && err.error.message != null) {
+          this.errorMessage = err.error.message;
+        } else {
+          this.errorMessage = "Error loggin in";
+        }
+        this.isLoggedIn = false;
       }
     })
+  }
+
+  // TODO: remove the logout button from here
+  logout() {
+    this.tokenStorage.signOut();
+    window.location.reload();
   }
 }

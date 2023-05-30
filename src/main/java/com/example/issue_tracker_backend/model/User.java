@@ -35,8 +35,6 @@ public class User {
     @Column(name = "email", nullable = false)
     String email;
 
-
-
     @ManyToMany()
     @JoinTable(
             name = "accessed_project",

@@ -1,5 +1,11 @@
 import { Component } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+
+// Move along with the requests to auth service
+const api = "http://localhost:8080/private/api/auth/signup";
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Component({
   selector: 'signup',
@@ -14,21 +20,25 @@ export class SignupComponent {
     password: null
   };
   errorMessage = "";
+  success = false;
 
   constructor(private http: HttpClient) {}
 
   signup() {
     const signupData = { email: this.form.email, username: this.form.username, password: this.form.password };
-    this.http.post("localhost:8080/signup", signupData).subscribe({
+    this.http.post(api, signupData, httpOptions).subscribe({
       next: (data : any)  => {
-        // this.success = true;
-        console.log(data);
-        localStorage.setItem("token", data.token);
-        // this.tokenStorage.saveToken(data.accessToken);
+        this.success = true;
+        window.location.assign("/login");
       },
-      error : err => {
-        this.errorMessage = err.error.message;
+      error: err => {
+        if (err != null && err.error != null && err.error.message != null) {
+          this.errorMessage = err.error.message;
+        } else {
+          this.errorMessage = "Error signing up";
+        }
+        this.success = false;
       }
-    })
+    });
   }
 }

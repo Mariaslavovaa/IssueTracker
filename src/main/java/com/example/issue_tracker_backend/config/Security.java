@@ -1,6 +1,6 @@
 package com.example.issue_tracker_backend.config;
 
-import com.example.issue_tracker_backend.service.CustomUserDetailsService;
+import com.example.issue_tracker_backend.service.UserDetailsServiceImplementation;
 import com.example.issue_tracker_backend.utils.JwtTokenGenerator;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -17,7 +17,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,13 +24,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.StringUtils;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.filter.OncePerRequestFilter;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -41,7 +38,7 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public class Security {
 
-    private final CustomUserDetailsService userDetailService;
+    private final UserDetailsServiceImplementation userDetailService;
 
     private final JwtTokenGenerator jwtGenerator;
 
@@ -69,13 +66,13 @@ public class Security {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authenticationProvider(authProvider)
                 .authorizeHttpRequests()
-                .requestMatchers("/secret/**").permitAll()
-                .requestMatchers("/private/api/**").permitAll().anyRequest().authenticated().and();
+                .requestMatchers("/private/api/tickets").authenticated()
+                .requestMatchers("/private/api/auth/**").permitAll();
         http.addFilterBefore(new OncePerRequestFilter() {
             @Override
             protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
                 String jwt = parseToken(request);
-                if (jwt != null) { // && jwtGenerator.validateToken(jwt)) {
+                if (jwt != null) {
                     String username = jwtGenerator.getUsernameFromToken(jwt);
 
                     UserDetails user = userDetailService.loadUserByUsername(username);
@@ -94,7 +91,7 @@ public class Security {
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowCredentials(true);
-        corsConfiguration.addAllowedOrigin("https://localhost:4200");
+        corsConfiguration.addAllowedOrigin("http://localhost:4200");
         corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
         corsConfiguration.setAllowedHeaders(Arrays.asList("Origin", "Access-Control-Allow-Origin", "Content-Type",
                 "Accept", "Authorization", "Origin, Accept", "X-Requested-With",
