@@ -29,8 +29,8 @@ public class Project {
     @Column(name = "Title", nullable = false)
     private String title;
 
-    @ManyToMany(mappedBy = "projects")
-    private List<User> usersWithAccess = new ArrayList<>();
+//    @ManyToMany(mappedBy = "projects")
+//    private List<User> usersWithAccess = new ArrayList<>();
 
     public Project(String title){
         this.title = title;
