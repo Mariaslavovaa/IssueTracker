@@ -9,7 +9,12 @@
     class="example-list"
     (cdkDropListDropped)="drop($event)"
   >
-    <div class="ticket" *ngFor="let item of todo" cdkDrag>{{ item }}</div>
+    <div class="ticket" *ngFor="let item of todo" cdkDrag>
+      <mat-card>
+        <mat-card-title> {{ item.split(":")[0] }}</mat-card-title>
+        <mat-card-subtitle>{{ item.split(":")[1] }}</mat-card-subtitle>
+      </mat-card>
+    </div>
   </div>
 </div>
 
@@ -25,7 +30,10 @@
     (cdkDropListDropped)="drop($event)"
   >
     <div class="ticket" *ngFor="let item of inprogress" cdkDrag>
-      {{ item }}
+      <mat-card>
+        <mat-card-title> {{ item.split(":")[0] }}</mat-card-title>
+        <mat-card-subtitle>{{ item.split(":")[1] }}</mat-card-subtitle>
+      </mat-card>
     </div>
   </div>
 </div>
@@ -42,7 +50,10 @@
     (cdkDropListDropped)="drop($event)"
   >
     <div class="ticket" *ngFor="let item of review" cdkDrag>
-      {{ item }}
+      <mat-card>
+        <mat-card-title> {{ item.split(":")[0] }}</mat-card-title>
+        <mat-card-subtitle>{{ item.split(":")[1] }}</mat-card-subtitle>
+      </mat-card>
     </div>
   </div>
 </div>
@@ -58,6 +69,11 @@
     class="example-list"
     (cdkDropListDropped)="drop($event)"
   >
-    <div class="ticket" *ngFor="let item of done" cdkDrag>{{ item }}</div>
+    <div class="ticket" *ngFor="let item of done" cdkDrag>
+      <mat-card>
+        <mat-card-title> {{ item.split(":")[0] }}</mat-card-title>
+        <mat-card-subtitle>{{ item.split(":")[1] }}</mat-card-subtitle>
+      </mat-card>
+    </div>
   </div>
 </div>

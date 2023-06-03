@@ -6,8 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./all-issues.component.css'],
 })
 export class AllIssuesComponent {
-  todo = ['Task1', 'Task2', 'Task3', 'Task4'];
+  todo = [
+    'Issue1:description',
+    'Issue2:description',
+    'Issue3',
+    'Issue4:description',
+  ];
   inprogress = [];
-  review = ['Task5'];
+  review = ['Issue5:description'];
   done = [];
 }
