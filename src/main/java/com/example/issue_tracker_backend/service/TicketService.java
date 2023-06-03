@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 public interface TicketService {
 
     Ticket createTicket(Ticket ticket);
-    Ticket updateTask(Ticket ticket);
+    Ticket updateTask(Ticket ticket, Long id);
     void deleteById(Long id);
 
 }

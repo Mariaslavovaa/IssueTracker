@@ -23,7 +23,7 @@ public class TicketRestController {
     @PutMapping("/{id}")
     public ResponseEntity<TicketDto> updateTicket(@PathVariable("id") Long id, @RequestBody TicketDto ticketDto){
         return new ResponseEntity<>(TicketConversion.entityToDto(ticketService
-                .updateTask(TicketConversion.dtoToEntity(ticketDto))), HttpStatus.OK);
+                .updateTask(TicketConversion.dtoToEntity(ticketDto), id)), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
