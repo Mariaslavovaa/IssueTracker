@@ -13,6 +13,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AssigneeIssuesComponent } from './components/assignee-issues/assignee-issues.component';
 import { MatCardModule } from '@angular/material/card';
+import { IssueTicketComponent } from './components/issue-ticket/issue-ticket.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { PortalModule } from '@angular/cdk/portal';
+import { EditWindowComponent } from './components/edit-window/edit-window/edit-window.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -22,6 +28,8 @@ import { MatCardModule } from '@angular/material/card';
     AllIssuesComponent,
     ProjectsIssuesComponent,
     AssigneeIssuesComponent,
+    IssueTicketComponent,
+    EditWindowComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +39,10 @@ import { MatCardModule } from '@angular/material/card';
     MatIconModule,
     MatButtonModule,
     MatCardModule,
+    MatDialogModule,
+    MatMenuModule,
+    PortalModule,
+    MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

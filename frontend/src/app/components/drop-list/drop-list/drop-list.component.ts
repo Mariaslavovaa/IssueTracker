@@ -4,6 +4,10 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
+import { IssueTicket } from 'src/app/models/issue-ticket-model';
+import { MatDialog } from '@angular/material/dialog';
+import { EditWindowComponent } from '../../edit-window/edit-window/edit-window.component';
+import { Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'drop-list',
@@ -11,12 +15,14 @@ import {
   styleUrls: ['./drop-list.component.css'],
 })
 export class DropListComponent {
-  @Input() todo: string[] = [];
-  @Input() inprogress: string[] = [];
-  @Input() review: string[] = [];
-  @Input() done: string[] = [];
+  @Input() todo: IssueTicket[] = [];
+  @Input() inprogress: IssueTicket[] = [];
+  @Input() review: IssueTicket[] = [];
+  @Input() done: IssueTicket[] = [];
 
-  drop(event: CdkDragDrop<string[]>) {
+  @Output() isFormOpen = new EventEmitter<boolean>(false); //: boolean = false;
+
+  drop(event: CdkDragDrop<IssueTicket[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -31,5 +37,12 @@ export class DropListComponent {
         event.currentIndex
       );
     }
+  }
+
+  constructor(private dialogRef: MatDialog) {}
+
+  openDialog() {
+    this.isFormOpen.emit(true);
+    this.dialogRef.open(EditWindowComponent);
   }
 }
