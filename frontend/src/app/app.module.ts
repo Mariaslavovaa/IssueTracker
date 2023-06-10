@@ -18,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 import { AuthInterceptorProviders } from './utils/auth.interceptor';
 
@@ -41,7 +42,9 @@ import { AuthInterceptorProviders } from './utils/auth.interceptor';
     MatButtonModule,
     MatCardModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatFormFieldModule,
+
   ],
   providers: [AuthInterceptorProviders],
   bootstrap: [AppComponent],

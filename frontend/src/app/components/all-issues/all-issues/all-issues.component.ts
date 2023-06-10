@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: './all-issues.component.html',
   styleUrls: ['./all-issues.component.css'],
 })
+
 export class AllIssuesComponent {
   todo = [
     'Issue1:description',
