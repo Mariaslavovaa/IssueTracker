@@ -16,6 +16,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { IssueTicketComponent } from './components/issue-ticket/issue-ticket.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { PortalModule } from '@angular/cdk/portal';
+import { EditWindowComponent } from './components/edit-window/edit-window/edit-window.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -29,8 +35,10 @@ import { AuthInterceptorProviders } from './utils/auth.interceptor';
     AllIssuesComponent,
     ProjectsIssuesComponent,
     AssigneeIssuesComponent,
+    IssueTicketComponent,
+    EditWindowComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,8 +48,12 @@ import { AuthInterceptorProviders } from './utils/auth.interceptor';
     MatIconModule,
     MatButtonModule,
     MatCardModule,
+    MatDialogModule,
+    MatMenuModule,
+    PortalModule,
+    MatFormFieldModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [AuthInterceptorProviders],
   bootstrap: [AppComponent],
