@@ -44,7 +44,7 @@ public class Ticket {
     @Column(name = "DateOfCreation", nullable = false)
     private LocalDate dateOfCreation;
 
-    @OneToOne()
+    @ManyToOne()
     @JoinColumn(name = "project_id", referencedColumnName = "id", nullable = false)
     private Project project;
 
