@@ -7,7 +7,7 @@ import { Project } from '../models/project-model';
   providedIn: 'root',
 })
 export class ProjectService {
-  private baseUrl = '';
+  private baseUrl = 'http://localhost:8080';
 
   constructor(private http: HttpClient) {}
 

@@ -33,9 +33,14 @@ public class Ticket {
     private Status status;
     @Column(name = "Description", nullable = false)
     private String description;
-    @OneToOne()
+    @ManyToOne()
     @JoinColumn(name = "Creator", referencedColumnName = "id")
     private User creator;
+
+    @ManyToOne()
+    @JoinColumn(name = "AssignedTo", referencedColumnName = "id")
+    private User assignedTo;
+
     @Column(name = "DateOfCreation", nullable = false)
     private LocalDate dateOfCreation;
 

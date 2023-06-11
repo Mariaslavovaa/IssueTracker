@@ -7,12 +7,12 @@ import { IssueTicket } from '../models/issue-ticket-model';
   providedIn: 'root',
 })
 export class IssueTicketService {
-  private baseUrl = 'private/api/tickets';
+  private baseUrl = 'http://localhost:8080';
 
   constructor(private http: HttpClient) {}
 
   getAllTicketsCurrUser(username: string | null): Observable<IssueTicket[]> {
-    const url = `${this.baseUrl}/${username}`; // ??? zavisi li neshto dr ot toq url
+    const url = `${this.baseUrl}/private/api/tickets/${username}`;
     return this.http.get<IssueTicket[]>(url);
   }
 

@@ -65,10 +65,10 @@ public class Security {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authenticationProvider(authProvider)
-                .authorizeHttpRequests()
+                .authorizeHttpRequests().anyRequest().permitAll();
                 // TODO: reenable later
-                // .requestMatchers("ckets").aut/private/api/tihenticated()
-                .requestMatchers("/private/api/auth/**").permitAll();
+                // .requestMatchers("tickets/private/api/").authenticated()
+                // .requestMatchers("/private/api/auth/**").permitAll();
         http.addFilterBefore(new OncePerRequestFilter() {
             @Override
             protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

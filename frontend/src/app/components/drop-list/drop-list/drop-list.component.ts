@@ -42,7 +42,7 @@ export class DropListComponent {
 
   constructor(private dialogRef: MatDialog) {}
 
-  ngOnInit() {
+  ngOnChanges() {
     this.allIssues.forEach((issue) => {
       switch (issue.status) {
         case Status.todo:
