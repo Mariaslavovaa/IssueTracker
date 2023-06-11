@@ -1,6 +1,6 @@
 package com.example.issue_tracker_backend.config;
 
-import com.example.issue_tracker_backend.service.UserDetailsServiceImplementation;
+import com.example.issue_tracker_backend.service.UserServiceImplementation;
 import com.example.issue_tracker_backend.utils.JwtTokenGenerator;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -38,7 +38,7 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public class Security {
 
-    private final UserDetailsServiceImplementation userDetailService;
+    private final UserServiceImplementation userService;
 
     private final JwtTokenGenerator jwtGenerator;
 
@@ -76,7 +76,7 @@ public class Security {
                 if (jwt != null) {
                     String username = jwtGenerator.getUsernameFromToken(jwt);
 
-                    UserDetails user = userDetailService.loadUserByUsername(username);
+                    UserDetails user = userService.loadUserByUsername(username);
                     UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
                             user, null, user.getAuthorities());
                     auth.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
@@ -108,7 +108,7 @@ public class Security {
 
     @Autowired    //configure login services
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
 
     @Bean

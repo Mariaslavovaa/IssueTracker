@@ -1,7 +1,6 @@
 package com.example.issue_tracker_backend.config;
 
 import com.example.issue_tracker_backend.model.User;
-import com.example.issue_tracker_backend.service.UserDetailsServiceImplementation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
