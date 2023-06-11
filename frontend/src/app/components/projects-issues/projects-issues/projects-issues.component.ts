@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IssueTicket } from 'src/app/models/issue-ticket-model';
+import { Project } from 'src/app/models/project-model';
+import { ProjectService } from 'src/app/service/project-service';
 
 @Component({
   selector: 'projects-issues',
@@ -7,28 +8,13 @@ import { IssueTicket } from 'src/app/models/issue-ticket-model';
   styleUrls: ['./projects-issues.component.css'],
 })
 export class ProjectsIssuesComponent {
-  projects = [
-    {
-      id: '1',
-      name: 'Project1',
-      todo: [new IssueTicket('Issue1', 'Description')],
-      inprogress: [],
-      review: [new IssueTicket('Issue2', 'Description')],
-      done: [],
-    },
-    {
-      id: '2',
-      name: 'Project2',
-      todo: [
-        new IssueTicket('Issue3', 'Description'),
-        new IssueTicket('Issue4', 'Description'),
-        new IssueTicket('Issue5', 'Description'),
-      ],
-      inprogress: [],
-      review: [new IssueTicket('Something', 'Description')],
-      done: [],
-    },
-  ];
+  projects: Project[] = [];
+
+  constructor(private ProjectService: ProjectService) {
+    this.ProjectService.getProjects().subscribe((projects) => {
+      this.projects = projects;
+    });
+  }
 
   isFormOpen: boolean = false;
 
