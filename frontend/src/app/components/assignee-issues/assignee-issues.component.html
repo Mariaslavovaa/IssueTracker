@@ -1,12 +1,9 @@
 <div *ngIf="!isFormOpen">
   <!-- <nav-bar></nav-bar> -->
   <div *ngFor="let user of users">
-    <p>{{ user.name }}</p>
+    <p>{{ user.username }}</p>
     <drop-list
-      [todo]="user.todo"
-      [inprogress]="user.inprogress"
-      [review]="user.review"
-      [done]="user.done"
+      [allIssues]="user.allIssues"
       (isFormOpen)="isOpen($event)"
     ></drop-list>
   </div>
