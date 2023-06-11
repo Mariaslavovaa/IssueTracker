@@ -2,10 +2,10 @@ import { Project } from './project-model';
 import { User } from './user-model';
 
 export enum Status {
-  todo,
-  inprogress,
-  review,
-  done,
+  todo = "TO_DO",
+  inprogress = "IN_PROGRESS",
+  review = "REVIEW",
+  done = "DONE",
 }
 
 export class IssueTicket {

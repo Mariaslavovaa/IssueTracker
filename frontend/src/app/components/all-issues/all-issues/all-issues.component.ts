@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IssueTicket, Status } from 'src/app/models/issue-ticket-model';
 import { IssueTicketService } from 'src/app/service/issues-service';
+import { TokenStorageService } from 'src/app/service/token-service.service';
 
 @Component({
   selector: 'app-all-issues',
@@ -10,9 +11,11 @@ import { IssueTicketService } from 'src/app/service/issues-service';
 export class AllIssuesComponent {
   allIssues: IssueTicket[] = [];
 
-  constructor(private issueTicketService: IssueTicketService) {
+
+  constructor(private issueTicketService: IssueTicketService, private tokenStorage: TokenStorageService) {
+
     this.issueTicketService
-      .getAllTicketsCurrUser(localStorage.getItem('currUsername'))
+      .getAllTicketsCurrUser(tokenStorage.getUsername())
       .subscribe((issueTickets) => {
         this.allIssues = issueTickets;
       });

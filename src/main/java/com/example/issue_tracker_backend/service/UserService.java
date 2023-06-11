@@ -4,6 +4,8 @@ import com.example.issue_tracker_backend.model.User;
 import com.example.issue_tracker_backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public interface UserService {
 
@@ -11,5 +13,7 @@ public interface UserService {
     User findByUsername(String username);
 
     User findByEmail(String email);
+
+    ArrayList<User> getAllUsers();
 
 }
