@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -42,6 +43,9 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id")
     )
     private List<Project> projects = new ArrayList<>();
+
+    @OneToMany(mappedBy = "creator")
+    private Set<Ticket> tickets;
 
     public User(String username, String email, String password){
         this.username = username;

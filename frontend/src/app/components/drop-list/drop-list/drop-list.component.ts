@@ -4,7 +4,7 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { IssueTicket } from 'src/app/models/issue-ticket-model';
+import { IssueTicket, Status } from 'src/app/models/issue-ticket-model';
 import { MatDialog } from '@angular/material/dialog';
 import { EditWindowComponent } from '../../edit-window/edit-window/edit-window.component';
 import { Output, EventEmitter } from '@angular/core';
@@ -15,10 +15,11 @@ import { Output, EventEmitter } from '@angular/core';
   styleUrls: ['./drop-list.component.css'],
 })
 export class DropListComponent {
-  @Input() todo: IssueTicket[] = [];
-  @Input() inprogress: IssueTicket[] = [];
-  @Input() review: IssueTicket[] = [];
-  @Input() done: IssueTicket[] = [];
+  @Input() allIssues: IssueTicket[] = [];
+  todo: IssueTicket[] = [];
+  inprogress: IssueTicket[] = [];
+  review: IssueTicket[] = [];
+  done: IssueTicket[] = [];
 
   @Output() isFormOpen = new EventEmitter<boolean>(false); //: boolean = false;
 
@@ -40,6 +41,25 @@ export class DropListComponent {
   }
 
   constructor(private dialogRef: MatDialog) {}
+
+  ngOnChanges() {
+    this.allIssues.forEach((issue) => {
+      switch (issue.status) {
+        case Status.todo:
+          this.todo.push(issue);
+          break;
+        case Status.inprogress:
+          this.inprogress.push(issue);
+          break;
+        case Status.review:
+          this.review.push(issue);
+          break;
+        case Status.done:
+          this.done.push(issue);
+          break;
+      }
+    });
+  }
 
   openDialog() {
     this.isFormOpen.emit(true);

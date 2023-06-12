@@ -6,5 +6,5 @@ import { IssueTicket } from 'src/app/models/issue-ticket-model';
   styleUrls: ['./issue-ticket.component.css'],
 })
 export class IssueTicketComponent {
-  @Input() ticket: IssueTicket = new IssueTicket('', '');
+  @Input() ticket: IssueTicket;
 }

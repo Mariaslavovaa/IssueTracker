@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IssueTicket } from 'src/app/models/issue-ticket-model';
+import { IssueTicket, Status } from 'src/app/models/issue-ticket-model';
+import { IssueTicketService } from 'src/app/service/issues-service';
+import { TokenStorageService } from 'src/app/service/token-service.service';
 
 @Component({
   selector: 'app-all-issues',
@@ -8,19 +10,22 @@ import { IssueTicket } from 'src/app/models/issue-ticket-model';
 })
 
 export class AllIssuesComponent {
-  todo = [
-    new IssueTicket('Issue1', 'Description'),
-    new IssueTicket('Issue2', 'Description'),
-    new IssueTicket('Issue3', 'Description'),
-    new IssueTicket('Issue4', 'Description'),
-  ];
-  inprogress = [];
-  review = [new IssueTicket('Issue5', 'Description')];
-  done = [new IssueTicket('Proba', 'Description')];
+  allIssues: IssueTicket[] = [];
+
+
+  constructor(private issueTicketService: IssueTicketService, private tokenStorage: TokenStorageService) {
+
+    this.issueTicketService
+      .getAllTicketsCurrUser(tokenStorage.getUsername())
+      .subscribe((issueTickets) => {
+        this.allIssues = issueTickets;
+      });
+  }
 
   isFormOpen: boolean = false;
 
   isOpen(isFOpen: boolean) {
     this.isFormOpen = isFOpen;
   }
+
 }
