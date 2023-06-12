@@ -16,11 +16,18 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { IssueTicketComponent } from './components/issue-ticket/issue-ticket.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
+import { PortalModule } from '@angular/cdk/portal';
+import { EditWindowComponent } from './components/edit-window/edit-window/edit-window.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { MatFormFieldModule } from '@angular/material/form-field';
-
 import { AuthInterceptorProviders } from './utils/auth.interceptor';
+import { HidePasswordComponent } from './components/hide-password/hide-password.component';
+import {MatInputModule} from '@angular/material/input'
+// import { IonicApp, IonicModule } from 'ionic-angular';
 
 @NgModule({
   declarations: [
@@ -30,8 +37,12 @@ import { AuthInterceptorProviders } from './utils/auth.interceptor';
     AllIssuesComponent,
     ProjectsIssuesComponent,
     AssigneeIssuesComponent,
-    SignupComponent,
-    LoginComponent
+    IssueTicketComponent,
+    EditWindowComponent,
+    // SignupComponent,
+    LoginComponent,
+    HidePasswordComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -40,12 +51,19 @@ import { AuthInterceptorProviders } from './utils/auth.interceptor';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    MatInputModule,
     MatCardModule,
+    MatDialogModule,
+    MatMenuModule,
+    PortalModule,
+    MatFormFieldModule,
     FormsModule,
     HttpClientModule,
     MatFormFieldModule,
+    // IonicModule.forRoot(MyApp),
 
   ],
+  exports: [FormsModule, MatFormFieldModule, MatInputModule],
   providers: [AuthInterceptorProviders],
   bootstrap: [AppComponent],
 })

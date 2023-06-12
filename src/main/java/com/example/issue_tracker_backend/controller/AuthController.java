@@ -33,7 +33,7 @@ public class AuthController {
 
     private final AuthenticationManager authManager;
 
-    @PostMapping("signup")
+    @PostMapping("/signup")
     public ResponseEntity<?> signupSave(@RequestBody SignupRequest signupRequest) {
         User user = userService.findByUsername(signupRequest.getUsername());
         if (user != null) {

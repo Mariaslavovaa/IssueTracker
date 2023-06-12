@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IssueTicket } from 'src/app/models/issue-ticket-model';
 
 @Component({
   selector: 'projects-issues',
@@ -10,18 +11,28 @@ export class ProjectsIssuesComponent {
     {
       id: '1',
       name: 'Project1',
-      todo: ['Issue2: Description', 'Issue2: Description'],
+      todo: [new IssueTicket('Issue1', 'Description')],
       inprogress: [],
-      review: ['Something'],
+      review: [new IssueTicket('Issue2', 'Description')],
       done: [],
     },
     {
       id: '2',
       name: 'Project2',
-      todo: ['Issue1', 'Issue2', 'Issue5'],
+      todo: [
+        new IssueTicket('Issue3', 'Description'),
+        new IssueTicket('Issue4', 'Description'),
+        new IssueTicket('Issue5', 'Description'),
+      ],
       inprogress: [],
-      review: ['Something'],
+      review: [new IssueTicket('Something', 'Description')],
       done: [],
     },
   ];
+
+  isFormOpen: boolean = false;
+
+  isOpen(isFOpen: boolean) {
+    this.isFormOpen = isFOpen;
+  }
 }

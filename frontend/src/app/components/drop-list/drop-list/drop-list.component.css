@@ -1,23 +1,20 @@
 .droplist-container {
   width: 350px;
-  max-width: 100%;
+  max-width: 70%;
   margin: 0 25px 25px 0;
   display: inline-block;
   vertical-align: top;
   font-weight: lighter;
 }
 
-h2 {
+/* h2 {
   text-align: center;
+} */
+button {
+  height: 40px;
+  width: 40px;
 }
 
-mat-card-title {
-  font-size: medium;
-}
-mat-card-subtitle {
-  font-size: small;
-  font-weight: 300;
-}
 .example-list {
   min-height: 60px;
   background: rgb(165, 213, 245);

@@ -1,79 +1,105 @@
-<div class="droplist-container">
-  <h2>To do</h2>
+<link
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet"
+/>
+<div>
+  <div class="droplist-container">
+    <h2>To do</h2>
 
-  <div
-    cdkDropList
-    #todoList="cdkDropList"
-    [cdkDropListData]="todo"
-    [cdkDropListConnectedTo]="[inprogressList, reviewList, doneList]"
-    class="example-list"
-    (cdkDropListDropped)="drop($event)"
-  >
-    <div class="ticket" *ngFor="let item of todo" cdkDrag>
-      <mat-card>
-        <mat-card-title> {{ item.split(":")[0] }}</mat-card-title>
-        <mat-card-subtitle>{{ item.split(":")[1] }}</mat-card-subtitle>
-      </mat-card>
+    <div
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="todo"
+      [cdkDropListConnectedTo]="[inprogressList, reviewList, doneList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="ticket" *ngFor="let ticket of todo" cdkDrag>
+        <issue-ticket [ticket]="ticket"></issue-ticket>
+        <button
+          mat-fab
+          color="primary"
+          aria-label="Example icon button with an edit icon"
+          (click)="openDialog()"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="droplist-container">
-  <h2>In Progress</h2>
+  <div class="droplist-container">
+    <h2>In Progress</h2>
 
-  <div
-    cdkDropList
-    #inprogressList="cdkDropList"
-    [cdkDropListData]="inprogress"
-    [cdkDropListConnectedTo]="[todoList, reviewList, doneList]"
-    class="example-list"
-    (cdkDropListDropped)="drop($event)"
-  >
-    <div class="ticket" *ngFor="let item of inprogress" cdkDrag>
-      <mat-card>
-        <mat-card-title> {{ item.split(":")[0] }}</mat-card-title>
-        <mat-card-subtitle>{{ item.split(":")[1] }}</mat-card-subtitle>
-      </mat-card>
+    <div
+      cdkDropList
+      #inprogressList="cdkDropList"
+      [cdkDropListData]="inprogress"
+      [cdkDropListConnectedTo]="[todoList, reviewList, doneList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="ticket" *ngFor="let ticket of inprogress" cdkDrag>
+        <issue-ticket [ticket]="ticket"></issue-ticket>
+        <button
+          mat-fab
+          color="primary"
+          aria-label="Example icon button with an edit icon"
+          (click)="openDialog()"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="droplist-container">
-  <h2>Review</h2>
+  <div class="droplist-container">
+    <h2>Review</h2>
 
-  <div
-    cdkDropList
-    #reviewList="cdkDropList"
-    [cdkDropListData]="review"
-    [cdkDropListConnectedTo]="[todoList, inprogressList, doneList]"
-    class="example-list"
-    (cdkDropListDropped)="drop($event)"
-  >
-    <div class="ticket" *ngFor="let item of review" cdkDrag>
-      <mat-card>
-        <mat-card-title> {{ item.split(":")[0] }}</mat-card-title>
-        <mat-card-subtitle>{{ item.split(":")[1] }}</mat-card-subtitle>
-      </mat-card>
+    <div
+      cdkDropList
+      #reviewList="cdkDropList"
+      [cdkDropListData]="review"
+      [cdkDropListConnectedTo]="[todoList, inprogressList, doneList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="ticket" *ngFor="let ticket of review" cdkDrag>
+        <issue-ticket [ticket]="ticket"></issue-ticket>
+        <button
+          mat-fab
+          color="primary"
+          aria-label="Example icon button with an edit icon"
+          (click)="openDialog()"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="droplist-container">
-  <h2>Done</h2>
+  <div class="droplist-container">
+    <h2>Done</h2>
 
-  <div
-    cdkDropList
-    #doneList="cdkDropList"
-    [cdkDropListData]="done"
-    [cdkDropListConnectedTo]="[todoList, inprogressList, reviewList]"
-    class="example-list"
-    (cdkDropListDropped)="drop($event)"
-  >
-    <div class="ticket" *ngFor="let item of done" cdkDrag>
-      <mat-card>
-        <mat-card-title> {{ item.split(":")[0] }}</mat-card-title>
-        <mat-card-subtitle>{{ item.split(":")[1] }}</mat-card-subtitle>
-      </mat-card>
+    <div
+      cdkDropList
+      #doneList="cdkDropList"
+      [cdkDropListData]="done"
+      [cdkDropListConnectedTo]="[todoList, inprogressList, reviewList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="ticket" *ngFor="let ticket of done" cdkDrag>
+        <issue-ticket [ticket]="ticket"></issue-ticket>
+        <button
+          mat-fab
+          color="primary"
+          aria-label="Example icon button with an edit icon"
+          (click)="openDialog()"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+      </div>
     </div>
   </div>
 </div>
