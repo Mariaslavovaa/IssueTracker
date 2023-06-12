@@ -6,6 +6,8 @@ import com.example.issue_tracker_backend.model.User;
 import com.example.issue_tracker_backend.repository.TicketRepository;
 import com.example.issue_tracker_backend.repository.UserRepository;
 
+import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,6 +21,8 @@ import java.util.List;
 public class UserServiceImplementation implements UserService, UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+
+    @Autowired
     public UserServiceImplementation(final UserRepository repository, final PasswordEncoder passwordEncoder, final TicketRepository ticketRepository) {
         this.userRepository = repository;
         this.passwordEncoder = passwordEncoder;
@@ -32,11 +36,13 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
         userRepository.save(newUser);
     }
 
-    public User findByUsername(String username){
+    public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
-    public User findByEmail(String email) { return userRepository.findByEmail(email); }
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
