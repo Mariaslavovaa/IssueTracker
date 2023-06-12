@@ -1,11 +1,13 @@
-<div class="signup-page">
+<!-- <div class="signup-page"> -->
+<div class="login-page">
   <div class="form">
       <form (ngSubmit)="login()">
-          <input type="text" name="username" [(ngModel)]="form.username" required placeholder="username"/>
-          <input type="password" name="password" id="password" [(ngModel)]="form.password" required placeholder="password"/>
+        <p title="title">Log in</p>
+          <input type="text" name="username" [(ngModel)]="form.username" required placeholder="Enter username"/>
+          <input type="password" name="password" id="password" [(ngModel)]="form.password" required placeholder="Enter password"/>
           <i class="fas fa-eye" onclick="show()"></i>
           <br>
-          <br>
+           <br>  <!-- Какво е това за бога? -->
 
           <button id="submit-btn" type="submit">
               SIGN IN
@@ -13,10 +15,7 @@
           <div>
               <p id="error">{{errorMessage}}</p>
           </div>
-
-          <button id="submit-btn" (click)="logout()" type="button">
-            SIGN OUT
-          </button>
+          <p class="already">You don't have a profile? <a routerLink="/signup">Register here</a></p>
       </form>
   </div>
 </div>

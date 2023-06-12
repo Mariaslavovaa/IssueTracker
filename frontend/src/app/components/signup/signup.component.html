@@ -1,19 +1,47 @@
 <div class="signup-page">
   <div class="form">
-      <form (ngSubmit)="signup()">
-          <input id="email" type="text" name="email" required [(ngModel)]="form.email" #email="ngModel" placeholder="email"/>
-          <input type="text" name="username" [(ngModel)]="form.username" required placeholder="username"/>
-          <input type="password" name="password" id="password" [(ngModel)]="form.password" required placeholder="password"/>
-          <i class="fas fa-eye" onclick="show()"></i>
+    <p class="title">Sign up</p>
+      <!-- <form >
+          <input type="email" name="mail" required placeholder="Enter email" #form.email/>
+          <input type="username" name="username"required placeholder="Enter username" #form.username/>
+          <input type="password" name="password"  required placeholder="Enter password" #form.password/>
+          <input type="password" name="confirm_password" #form.confirm_password required placeholder="Confirm password"/>
+        
+          <i class="fa fa-eye" aria-hidden="true"></i>
           <br>
           <br>
 
-          <button id="submit-btn" type="submit">
+
+          <button id="submit-btn" (click)="signup()">
               SIGN UP
           </button>
           <div>
             <p id="error">{{errorMessage}}</p>
           </div>
+          <a routerLink="/login">Login here</a>
+      </form> -->
+      <form  (ngSubmit)="signup()" class="form">
+
+        <mat-form-field class="form-element">
+          <input type="email" name="mail" required placeholder="Enter email" [(ngModel)]="form.email" />
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+          <input type="username" name="username"required placeholder="Enter username" [(ngModel)]="form.username"/>
+        </mat-form-field>
+    
+        <mat-form-field class="form-element">
+          <input type="password" name="password"  required placeholder="Enter password" [(ngModel)]="form.password"/>
+        </mat-form-field>
+
+        <mat-form-field class="form-element">
+          <input type="password" name="confirm_password" required placeholder="Confirm password" [(ngModel)]="form.confirm_password"/>
+        </mat-form-field>
+    
+        <div class="form-element">
+          <button mat-raised-button color="primary" type="submit" class="button">Submit Form</button>
+        </div>
+    
       </form>
   </div>
 </div>
