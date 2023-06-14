@@ -37,6 +37,7 @@ export class DropListComponent {
         event.previousIndex,
         event.currentIndex
       );
+      // TODO: Send request to update the status of the issue.
     }
   }
 

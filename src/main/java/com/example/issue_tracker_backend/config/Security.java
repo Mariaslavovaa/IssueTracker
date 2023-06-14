@@ -62,18 +62,22 @@ public class Security {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
-                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).accessDeniedHandler(
+                        ((request, response, accessDeniedException) -> {
+                            System.out.println("Here");
+                        })
+                ).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authenticationProvider(authProvider)
-                .authorizeHttpRequests().anyRequest().permitAll();
+                .authenticationProvider(authProvider).authorizeHttpRequests().anyRequest().permitAll();
+
                 // TODO: reenable later
-                // .requestMatchers("tickets/private/api/").authenticated()
-                // .requestMatchers("/private/api/auth/**").permitAll();
+                // .requestMatchers("/private/api/tickets/**").authenticated()
+                // .requestMatchers("/private/api/auth/**").permitAll().and();
         http.addFilterBefore(new OncePerRequestFilter() {
             @Override
             protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
                 String jwt = parseToken(request);
-                if (jwt != null) {
+                if (jwt != null && jwtGenerator.validateJwtToken(jwt)) {
                     String username = jwtGenerator.getUsernameFromToken(jwt);
 
                     UserDetails user = userService.loadUserByUsername(username);
