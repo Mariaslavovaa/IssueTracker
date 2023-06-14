@@ -36,7 +36,7 @@ export class LoginComponent {
         this.isLoggedIn = true;
         this.tokenStorage.saveToken(data.token);
         this.tokenStorage.saveUser({ username: data.username, email: data.email });
-        window.location.reload();
+        window.location.href = "all-issues";
       },
       error: err => {
         if (err != null && err.error != null && err.error.message != null) {
