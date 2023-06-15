@@ -15,6 +15,10 @@ button {
   left: 6%;
 }
 
+.btn-logout {
+ left: 55%;
+}
+
 .h1 {
   font-weight: 600;
   top: 2rem;
@@ -24,4 +28,21 @@ hr {
   height: 1px;
   border-width: 0;
   background-color: #062125;
+}
+
+/* .example-container {
+  width: 500px;
+  height: 300px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+} */
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-sidenav {
+  padding: 20px;
 }

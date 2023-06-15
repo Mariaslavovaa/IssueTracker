@@ -26,6 +26,9 @@ public class TicketServiceImplementation implements TicketService{
         if (ticket == null){
             throw new IllegalArgumentException("Ticket cannot be null!");
         }
+        if (ticket.getAssignedTo() != null && userRepository.findByUsername(ticket.getAssignedTo().getUsername()) == null){
+                throw new IllegalArgumentException("Invalid username");
+        }
         return repository.save(ticket);
     }
 

@@ -1,3 +1,4 @@
+
 <mat-toolbar>
   <h1 class="h1">Issue Tracker</h1>
   <button
@@ -27,6 +28,11 @@
     ariaCurrentWhenActive="page"
   >
     Assaignee Issues
+  </button>
+
+  <button mat-fab extended class="btn-logout" (click)="logout()">
+    <mat-icon>logout</mat-icon>
+    Logout
   </button>
 </mat-toolbar>
 <hr />

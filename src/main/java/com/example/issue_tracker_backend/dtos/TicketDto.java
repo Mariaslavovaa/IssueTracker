@@ -16,15 +16,7 @@ public class TicketDto {
     private Status status;
     private String description;
     private User creator;
+    private User assignedTo;
     private LocalDate dateOfCreation;
     private Project project;
-
-    public TicketDto(String title, String description, User creator, Project project){
-        this.title = title;
-        this.description = description;
-        this.creator = creator;
-        this.status = Status.TO_DO;
-        this.dateOfCreation = LocalDate.now();
-        this.project = project;
-    }
 }
