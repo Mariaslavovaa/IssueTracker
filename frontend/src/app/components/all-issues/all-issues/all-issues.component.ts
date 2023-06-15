@@ -8,6 +8,7 @@ import { TokenStorageService } from 'src/app/service/token-service.service';
   templateUrl: './all-issues.component.html',
   styleUrls: ['./all-issues.component.css'],
 })
+
 export class AllIssuesComponent {
   allIssues: IssueTicket[] = [];
 

@@ -24,8 +24,11 @@ import { EditWindowComponent } from './components/edit-window/edit-window/edit-w
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AuthInterceptorProviders } from './utils/auth.interceptor';
+import { MatInputModule } from '@angular/material/input'
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -37,8 +40,9 @@ import { AuthInterceptorProviders } from './utils/auth.interceptor';
     AssigneeIssuesComponent,
     IssueTicketComponent,
     EditWindowComponent,
-    SignupComponent,
+    // SignupComponent,
     LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +51,7 @@ import { AuthInterceptorProviders } from './utils/auth.interceptor';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    MatInputModule,
     MatCardModule,
     MatDialogModule,
     MatMenuModule,
@@ -54,8 +59,12 @@ import { AuthInterceptorProviders } from './utils/auth.interceptor';
     MatFormFieldModule,
     FormsModule,
     HttpClientModule,
+    MatFormFieldModule,
+    BrowserAnimationsModule,
+    MatSidenavModule,
   ],
+  exports: [FormsModule, MatFormFieldModule, MatInputModule, MatIconModule, MatSidenavModule, BrowserAnimationsModule],
   providers: [AuthInterceptorProviders],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
