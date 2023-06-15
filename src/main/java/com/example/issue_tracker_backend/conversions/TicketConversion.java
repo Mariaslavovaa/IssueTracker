@@ -8,11 +8,11 @@ import lombok.experimental.UtilityClass;
 public class TicketConversion {
     public static TicketDto entityToDto(Ticket ticket){
         return new TicketDto(ticket.getId(), ticket.getTitle(), ticket.getStatus(),
-                ticket.getDescription(), ticket.getCreator(), ticket.getDateOfCreation(), ticket.getProject());
+                ticket.getDescription(), ticket.getCreator(), ticket.getAssignedTo(), ticket.getDateOfCreation(), ticket.getProject());
     }
 
     public static Ticket dtoToEntity(TicketDto ticketDto){
-        return new Ticket(ticketDto.getTitle(), ticketDto.getDescription(), ticketDto.getCreator(), ticketDto.getProject());
+        return new Ticket(ticketDto.getTitle(), ticketDto.getDescription(), ticketDto.getCreator(), ticketDto.getAssignedTo(), ticketDto.getProject());
     }
 }
 

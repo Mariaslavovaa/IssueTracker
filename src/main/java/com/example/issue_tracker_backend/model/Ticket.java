@@ -48,12 +48,13 @@ public class Ticket {
     @JoinColumn(name = "project_id", referencedColumnName = "id", nullable = false)
     private Project project;
 
-    public Ticket(String title, String description, User creator, Project project) {
+    public Ticket(String title, String description, User creator, User assignedTo, Project project) {
         this.title = title;
         this.description = description;
         this.creator = creator;
         this.status = Status.TO_DO;
         this.dateOfCreation = LocalDate.now();
+        this.assignedTo = assignedTo;
         this.project = project;
     }
 }

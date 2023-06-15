@@ -38,19 +38,15 @@ public class DataGenerator {
             User user2 = new User("batsanov2", "batsanov3@test.test", passwordEncoder.encode("123"));
             userRepository.save(user2);
 
-            Ticket ticket1 = new Ticket( "defect1", "Defect1",user, project1);
-            ticket1.setAssignedTo(user);
+            Ticket ticket1 = new Ticket( "defect1", "Defect1",user,null, project1);
+
             ticketRepository.save(ticket1);
 
-            Ticket ticket2 = new Ticket( "defect2", "Defect2",user, project1);
-            ticket2.setAssignedTo(user1);
+            Ticket ticket2 = new Ticket( "defect2", "Defect2",user, user2, project1);
             ticketRepository.save(ticket2);
 
-            Ticket ticket3 = new Ticket( "defect3", "Defect3",user, project1);
-            ticket3.setAssignedTo(user2);
+            Ticket ticket3 = new Ticket( "defect3", "Defect3",user,null, project1);
             ticketRepository.save(ticket3);
-
-
 
         };
     }
