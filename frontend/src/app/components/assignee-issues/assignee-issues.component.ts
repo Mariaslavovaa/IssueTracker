@@ -12,8 +12,13 @@ export class AssigneeIssuesComponent {
   users: User[] = [];
 
   constructor(private UserService: UserService) {
-    this.UserService.getAllUsers().subscribe((users) => {
-      this.users = users;
+    this.UserService.getAllUsers().subscribe({
+      next: (users : any) => {
+        this.users = users;
+      },
+      error: (err : any) => {
+        window.location.href="login";
+      }
     });
   }
 

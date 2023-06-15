@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit{
         alert("Welcome " + response.username)
         this.isLoggedIn = true;
         this.tokenStorage.saveUser({ username: response.username, email: response.email })
+        this.tokenStorage.saveToken(response.token);
         this.router.navigateByUrl("/all-issues")
       }
     })

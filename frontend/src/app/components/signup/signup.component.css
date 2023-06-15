@@ -1,14 +1,7 @@
-/* @import url(https://fonts.googleapis.com/css?family=Roboto:300);
-
-.body{
-  background-image: url('https://ordinaryfaith.net/wp-content/uploads/2016/03/Gray-plain-website-background.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-} */
 
 .signup-page {
-  width: 450px;
-  padding: 6% 0 0;
+  width: 500px;
+  padding: 4% 0 0;
   margin: auto;
 }
 
@@ -18,11 +11,10 @@
   background: rgb(165, 213, 245);
   box-shadow: 0 8px 32px 0 rgba(14, 117, 165, 0.842);
   max-width: 360px;
-  margin: 0 auto 100px;
+  margin: 0 auto 0px;
   padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-
 }
 
 .form p{
@@ -31,17 +23,15 @@
 } 
 
 .form input {
-  font-family: FontAwesome, "Roboto", sans-serif;
-  outline: 0;
+  
   background: #f2f2f2;
   width: 100%;
   border: 0;
-  margin: 0 0 15px;
   padding: 15px;
   box-sizing: border-box;
   font-size: 14px;
   border-radius:10px;
-}
+} 
 .form button {
   font-family: "Titillium Web", sans-serif;
   font-size: 14px;
@@ -61,60 +51,9 @@
   transition: all 0.2s;
 }
 
-.form button:hover,.form button:focus {  /* Kakvo e tova? */
+.form button:hover,.form button:focus { 
   background: #64b3de;
     box-shadow: 0 5px 10px rgba(231, 235, 236, 0.966);
   transform: translateY(-4px);
 }
-.form button:active {  /* Kakvo e tova? */
-  transform: translateY(2px);
-  box-shadow: 0 2.5px 5px rgb(2, 31, 48);
-}
 
-.form .message {  /* Kakvo e tova? */
-  margin: 6px 6px;
-  color: #3275da;
-  font-size: 11px;
-  text-align: center;
-  font-weight: bold;
-  font-style: normal;
-}
-.form .message a {  /* Kakvo e tova? */
-  color: #ffffff;
-  text-decoration: none;
-  font-size: 13px;
-}
-
-.container {  /* Kakvo e tova? */
-  position: relative;
-  z-index: 1;
-  max-width: 300px;
-  margin: 0 auto;
-}
-.container:before, .container:after {  /* Kakvo e tova? */
-  content: "";
-  display: block;
-  clear: both;
-}
-.container .info {  /* Kakvo e tova? */
-  margin: 50px auto;
-  text-align: center;
-}
-.container .info h1 {  /* Kakvo e tova? */
-  margin: 0 0 15px;
-  padding: 0;
-  font-size: 36px;
-  font-weight: 300;
-  color: #1a1a1a;
-}
-.container .info span {  /* Kakvo e tova? */
-  color: #4d4d4d;
-  font-size: 12px;
-}
-.container .info span a {  /* Kakvo e tova? */
-  color: #000000;
-  text-decoration: none;
-}
-.container .info span .fa {  /* Kakvo e tova? */
-  color: #EF3B3A;
-}

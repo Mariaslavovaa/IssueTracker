@@ -27,9 +27,17 @@ public class JwtTokenGenerator {
                 .compact();
     }
 
+    public boolean validateJwtToken(String token) {
+        try {
+            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
+            return true;
+        } catch (Exception e) {
+            System.out.println("Invalid jwt token");
+        }
+        return false;
+    }
+
     public String getUsernameFromToken(String token) {
-        // JwtParser parser = Jwts.parserBuilder().setSigningKey(jwtSecret.getBytes()).build();
-        // return parser.parseClaimsJws(token).getBody().getSubject();
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
     }
 }

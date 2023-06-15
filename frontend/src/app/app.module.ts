@@ -25,9 +25,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorProviders } from './utils/auth.interceptor';
-import { HidePasswordComponent } from './components/hide-password/hide-password.component';
-import {MatInputModule} from '@angular/material/input'
-// import { IonicApp, IonicModule } from 'ionic-angular';
+import { MatInputModule } from '@angular/material/input'
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -41,7 +42,6 @@ import {MatInputModule} from '@angular/material/input'
     EditWindowComponent,
     // SignupComponent,
     LoginComponent,
-    HidePasswordComponent,
     SignupComponent
   ],
   imports: [
@@ -60,11 +60,11 @@ import {MatInputModule} from '@angular/material/input'
     FormsModule,
     HttpClientModule,
     MatFormFieldModule,
-    // IonicModule.forRoot(MyApp),
-
+    BrowserAnimationsModule,
+    MatSidenavModule,
   ],
-  exports: [FormsModule, MatFormFieldModule, MatInputModule],
+  exports: [FormsModule, MatFormFieldModule, MatInputModule, MatIconModule, MatSidenavModule, BrowserAnimationsModule],
   providers: [AuthInterceptorProviders],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

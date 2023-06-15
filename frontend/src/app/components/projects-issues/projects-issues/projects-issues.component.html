@@ -1,12 +1,4 @@
 <nav-bar></nav-bar>
-<div *ngFor="let project of projects">
-  <p>{{ project.name }}</p>
-  <drop-list
-    [todo]="project.todo"
-    [inprogress]="project.inprogress"
-    [review]="project.review"
-    [done]="project.done"
-  ></drop-list>
 <div *ngIf="!isFormOpen">
   <!-- <nav-bar></nav-bar> -->
   <div *ngFor="let project of projects">

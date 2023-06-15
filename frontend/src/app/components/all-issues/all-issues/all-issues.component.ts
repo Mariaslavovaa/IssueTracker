@@ -17,8 +17,13 @@ export class AllIssuesComponent {
 
     this.issueTicketService
       .getAllTicketsCurrUser(tokenStorage.getUsername())
-      .subscribe((issueTickets) => {
-        this.allIssues = issueTickets;
+      .subscribe({
+        next: (issueTickets) => {
+          this.allIssues = issueTickets;
+        },
+        error: (err : any) => {
+          window.location.href="login";
+        }
       });
   }
 

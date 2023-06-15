@@ -12,7 +12,7 @@ export class ProjectService {
   constructor(private http: HttpClient) {}
 
   getProjects(): Observable<Project[]> {
-    const url = `${this.baseUrl}/projects/all`; // ??
+    const url = `${this.baseUrl}/projects/all`;
     return this.http.get<Project[]>(url);
   }
 }

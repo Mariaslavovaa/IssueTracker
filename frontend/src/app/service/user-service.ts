@@ -12,7 +12,7 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getAllUsers(): Observable<User[]> {
-    const url = `${this.baseUrl}/users/all`; // ??
+    const url = `${this.baseUrl}/users/all`;
     return this.http.get<User[]>(url);
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router } from '@angular/router';
-import { User } from 'src/app/models/user-model';
+import { SignupUser } from 'src/app/models/signup-user-model';
 import { SignupService } from 'src/app/service/signup.service';
 import { MatFormField } from '@angular/material/form-field';
 
@@ -13,7 +13,9 @@ import { MatFormField } from '@angular/material/form-field';
 
 export class SignupComponent {
 
-  signupUser?: User
+  hide = true
+  hideConfirmation = true
+  signupUser?: SignupUser
   constructor(private readonly signupService: SignupService, private router: Router) {console.log("top konop") }
 
   form: any = {
