@@ -11,14 +11,7 @@ export class ProjectsIssuesComponent {
   projects: Project[] = [];
 
   constructor(private ProjectService: ProjectService) {
-    this.ProjectService.getProjects().subscribe({
-        next: (projects : Project[]) => {
-          this.projects = projects;
-        },
-        error: (err : any) => {
-          window.location.href="login";
-        }
-      });
+    this.ProjectService.getProjects();
   }
 
   isFormOpen: boolean = false;

@@ -25,10 +25,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorProviders } from './utils/auth.interceptor';
-import { MatInputModule } from '@angular/material/input'
+import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 
 @NgModule({
   declarations: [
@@ -39,10 +38,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ProjectsIssuesComponent,
     AssigneeIssuesComponent,
     IssueTicketComponent,
-    EditWindowComponent,
-    // SignupComponent,
+    //EditWindowComponent,
+    SignupComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,12 +58,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatFormFieldModule,
     FormsModule,
     HttpClientModule,
-    MatFormFieldModule,
+    EditWindowComponent,
     BrowserAnimationsModule,
-    MatSidenavModule,
   ],
-  exports: [FormsModule, MatFormFieldModule, MatInputModule, MatIconModule, MatSidenavModule, BrowserAnimationsModule],
+  exports: [
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatSidenavModule,
+    BrowserAnimationsModule,
+  ],
   providers: [AuthInterceptorProviders],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

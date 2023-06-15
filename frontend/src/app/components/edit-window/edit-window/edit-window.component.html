@@ -1,1 +1,66 @@
-<div>works</div>
+<form #itemForm="ngForm" class="example-form">
+  <p>Edit Ticket</p>
+  <mat-form-field class="form-field" id="first">
+    <input
+      matInput
+      #inputTitle
+      maxlength="50"
+      placeholder="Title"
+      name="ticketTitle"
+      [(ngModel)]="ticket.title"
+      value="{{ ticket.title }}"
+      ngModel
+    />
+    <mat-hint align="end">{{ inputTitle.value.length }}/50</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field class="txt-area" id="second">
+    <textarea
+      matInput
+      #input
+      maxlength="250"
+      name="ticketDescription"
+      placeholder="Description"
+      [(ngModel)]="ticket.description"
+      value="{{ ticket.description }}"
+    ></textarea>
+    <mat-hint align="end">{{ input.value.length }}/250</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field class="smalltxt" id="third">
+    <label>Assigned to: </label>
+    <input
+      matInput
+      #inputAssigned
+      maxlength="30"
+      name="ticketAssigned"
+      placeholder="Name"
+      [(ngModel)]="ticket.assignedTo"
+      value="{{ ticket.assignedTo }}"
+    />
+    <mat-hint align="end">{{ inputAssigned.value.length }}/30</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field class="smalltxt" id="forth">
+    <label>From Project: </label>
+    <input
+      matInput
+      #inputProject
+      maxlength="30"
+      name="ticketProject"
+      placeholder="Project name"
+      [(ngModel)]="ticket.project"
+      value="{{ ticket.project }}"
+    />
+    <mat-hint align="end">{{ inputProject.value.length }}/30</mat-hint>
+  </mat-form-field>
+
+  <label>Creator of ticket: {{ ticket.creator }}</label>
+
+  <label
+    >Date of creation:
+    {{ ticket.dateOfCreation.toLocaleDateString("en-GB") }}</label
+  >
+  <button id="btnSave" (click)="saveTicket()">Save Changes</button>
+  <button id="btnDel">Delete Ticket</button>
+</form>

@@ -8,23 +8,24 @@ import { TokenStorageService } from 'src/app/service/token-service.service';
   templateUrl: './all-issues.component.html',
   styleUrls: ['./all-issues.component.css'],
 })
-
 export class AllIssuesComponent {
   allIssues: IssueTicket[] = [];
+  //test data -> new IssueTicket(
+  //   123,
+  //   'Issue1',
+  //   'Description',
+  //   Status.inprogress,
+  //   'Ivan',
+  //   'Ivan',
+  //   new Date(),
+  //   'Project1'
+  // ),
 
-
-  constructor(private issueTicketService: IssueTicketService, private tokenStorage: TokenStorageService) {
-
-    this.issueTicketService
-      .getAllTicketsCurrUser(tokenStorage.getUsername())
-      .subscribe({
-        next: (issueTickets) => {
-          this.allIssues = issueTickets;
-        },
-        error: (err : any) => {
-          window.location.href="login";
-        }
-      });
+  constructor(
+    private issueTicketService: IssueTicketService,
+    private tokenStorage: TokenStorageService
+  ) {
+    this.issueTicketService.getAllTicketsCurrUser(tokenStorage.getUsername());
   }
 
   isFormOpen: boolean = false;
@@ -32,5 +33,4 @@ export class AllIssuesComponent {
   isOpen(isFOpen: boolean) {
     this.isFormOpen = isFOpen;
   }
-
 }
