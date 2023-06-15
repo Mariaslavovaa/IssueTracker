@@ -12,9 +12,7 @@ export class AssigneeIssuesComponent {
   users: User[] = [];
 
   constructor(private UserService: UserService) {
-    this.UserService.getAllUsers().subscribe((users) => {
-      this.users = users;
-    });
+    this.users = this.UserService.getAllUsers();
   }
 
   isFormOpen: boolean = false;

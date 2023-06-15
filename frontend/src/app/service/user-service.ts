@@ -11,8 +11,14 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  getAllUsers(): Observable<User[]> {
+  getAllUsers(): User[] {
+    var result: User[] = [];
+
     const url = `${this.baseUrl}/users/all`; // ??
-    return this.http.get<User[]>(url);
+    this.http.get<User[]>(url).subscribe((users) => {
+      result = users;
+    });
+
+    return result;
   }
 }

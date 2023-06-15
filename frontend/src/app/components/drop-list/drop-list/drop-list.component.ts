@@ -61,8 +61,10 @@ export class DropListComponent {
     });
   }
 
-  openDialog() {
+  openDialog(ticket: IssueTicket) {
     this.isFormOpen.emit(true);
-    this.dialogRef.open(EditWindowComponent);
+    this.dialogRef.open(EditWindowComponent, {
+      data: { ticket },
+    });
   }
 }

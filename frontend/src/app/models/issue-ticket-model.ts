@@ -2,21 +2,21 @@ import { Project } from './project-model';
 import { User } from './user-model';
 
 export enum Status {
-  todo = "TO_DO",
-  inprogress = "IN_PROGRESS",
-  review = "REVIEW",
-  done = "DONE",
+  todo = 'TO_DO',
+  inprogress = 'IN_PROGRESS',
+  review = 'REVIEW',
+  done = 'DONE',
 }
 
 export class IssueTicket {
   id: number;
-  title: string;
-  description: string;
+  title: String;
+  description: String;
   status: Status;
-  creator: string; //User;
-  assignedTo: string;
+  creator: String; //User;
+  assignedTo: String; //user
   dateOfCreation: Date;
-  project: string; //Project;
+  project: String; //Project;
 
   constructor(
     id: number,

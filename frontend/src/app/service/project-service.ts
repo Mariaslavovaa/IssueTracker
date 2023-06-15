@@ -11,8 +11,12 @@ export class ProjectService {
 
   constructor(private http: HttpClient) {}
 
-  getProjects(): Observable<Project[]> {
+  getProjects(): Project[] {
+    var result: Project[] = [];
     const url = `${this.baseUrl}/projects/all`; // ??
-    return this.http.get<Project[]>(url);
+    this.http.get<Project[]>(url).subscribe((projects) => {
+      result = projects;
+    });
+    return result;
   }
 }

@@ -10,15 +10,22 @@ import { TokenStorageService } from 'src/app/service/token-service.service';
 })
 export class AllIssuesComponent {
   allIssues: IssueTicket[] = [];
+  //test data -> new IssueTicket(
+  //   123,
+  //   'Issue1',
+  //   'Description',
+  //   Status.inprogress,
+  //   'Ivan',
+  //   'Ivan',
+  //   new Date(),
+  //   'Project1'
+  // ),
 
-
-  constructor(private issueTicketService: IssueTicketService, private tokenStorage: TokenStorageService) {
-
-    this.issueTicketService
-      .getAllTicketsCurrUser(tokenStorage.getUsername())
-      .subscribe((issueTickets) => {
-        this.allIssues = issueTickets;
-      });
+  constructor(
+    private issueTicketService: IssueTicketService,
+    private tokenStorage: TokenStorageService
+  ) {
+    this.issueTicketService.getAllTicketsCurrUser(tokenStorage.getUsername());
   }
 
   isFormOpen: boolean = false;
@@ -26,5 +33,4 @@ export class AllIssuesComponent {
   isOpen(isFOpen: boolean) {
     this.isFormOpen = isFOpen;
   }
-
 }

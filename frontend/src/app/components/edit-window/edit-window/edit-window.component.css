@@ -1,22 +1,64 @@
-div {
+form {
   position: fixed !important;
-  width: 80%;
-  height: 80%;
-  top: 10%;
-  left: 10%;
+  width: 70%;
+  height: 70%;
+  top: 15%;
+  left: 15%;
   background-color: white;
   margin: 0 auto;
-  /* color  and style*/
   font-size: 25px;
   font-family: Raleway;
   font-weight: 600;
   text-align: left;
   color: rgba(30, 29, 29, 0.87);
-  flex-direction: row;
-  align-items: center;
   box-sizing: border-box;
   background: rgb(165, 213, 245);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   border-radius: 7px;
   border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-content: flex-start;
+}
+
+mat-form-field,
+label {
+  margin-right: 12px;
+  box-sizing: border-box;
+  font-size: medium;
+  width: 50%;
+  left: 2%;
+  margin-top: 2%;
+}
+
+.smalltxt {
+  width: 30%;
+}
+
+button {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  width: 150px;
+  height: 50px;
+  font-size: 20px;
+}
+
+#btnDel {
+  right: 25%;
+}
+
+textarea {
+  max-width: 550px;
+  max-height: 300px;
+}
+p {
+  margin-left: 5%;
 }
