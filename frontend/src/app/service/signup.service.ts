@@ -11,11 +11,9 @@ export class SignupService {
 
   constructor(private readonly http: HttpClient) { }
 
-
   public createUser(user : SignupUser) : Observable<SignupUser>{
     const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
     return this.http.post<SignupUser>(`${environment.restApi}/private/api/auth/signup`, user, httpOptions);
   }
 

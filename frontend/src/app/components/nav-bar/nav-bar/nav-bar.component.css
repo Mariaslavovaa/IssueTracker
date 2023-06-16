@@ -17,8 +17,11 @@ button {
 .btn-newTicket {
   left: 15%;
 }
+.btn-newProject {
+  left: 17%;
+}
 .btn-logout {
-  left: 45%;
+  left: 40%;
 }
 
 .h1 {

@@ -29,6 +29,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddNewTicketComponent } from './components/add-new-ticket/add-new-ticket.component';
+import { AddNewProjectComponent } from './components/add-new-project/add-new-project.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { AddNewTicketComponent } from './components/add-new-ticket/add-new-ticke
     LoginComponent,
     SignupComponent,
     AddNewTicketComponent,
+    AddNewProjectComponent,
   ],
   imports: [
     BrowserModule,

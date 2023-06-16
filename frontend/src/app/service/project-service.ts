@@ -19,4 +19,11 @@ export class ProjectService {
     });
     return result;
   }
+
+  createProject(project: Project) {
+    const url = `${this.baseUrl}/projects`;
+    return this.http.post<Project>(url, project);
+  }
+
+
 }
