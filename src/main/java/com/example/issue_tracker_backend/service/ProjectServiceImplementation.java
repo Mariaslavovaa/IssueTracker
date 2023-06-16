@@ -26,9 +26,9 @@ public class ProjectServiceImplementation implements ProjectService {
     }
 
     @Override
-    public void deleteById(Long id) {
-        ticketRepository.findAllByProjectId(id).forEach(ticket -> ticketRepository.deleteById(ticket.getId()));
-        projectRepository.deleteById(id);
+    public void deleteByTitle(String title) {
+        ticketRepository.findAllByProjectTitle(title).forEach(ticket -> ticketRepository.deleteById(ticket.getId()));
+        projectRepository.deleteById(title);
     }
 
 }

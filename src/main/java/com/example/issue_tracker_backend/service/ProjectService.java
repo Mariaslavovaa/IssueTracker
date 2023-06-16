@@ -9,6 +9,6 @@ import java.util.List;
 public interface ProjectService {
     List<Project> getAllProjects();
 
-    void deleteById(Long id);
+    void deleteByTitle(String title);
 
 }

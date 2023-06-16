@@ -1,6 +1,5 @@
 package com.example.issue_tracker_backend.controller;
 
-import com.example.issue_tracker_backend.conversions.TicketConversion;
 import com.example.issue_tracker_backend.dtos.TicketDto;
 import com.example.issue_tracker_backend.model.Project;
 import com.example.issue_tracker_backend.model.Ticket;
@@ -31,12 +30,12 @@ public class ProjectController {
     }
 
     @GetMapping("private/api/projects/issues/{id}")
-    public ResponseEntity<List<TicketDto>> getTickets(@PathVariable("id") Long id) {
-        List<Ticket> tickets = ticketService.findAllTicketsByProject(id);
+    public ResponseEntity<List<TicketDto>> getTickets(@PathVariable("id") String title) {
+        List<Ticket> tickets = ticketService.findAllTicketsByProject(title);
         ArrayList<TicketDto> ticketsDto = new ArrayList<TicketDto>();
         ticketsDto.ensureCapacity(tickets.size());
         for (Ticket ticket : tickets) {
-            ticketsDto.add(TicketConversion.entityToDto(ticket));
+            ticketsDto.add(ticketService.entityToDto(ticket));
         }
         return new ResponseEntity<>(ticketsDto, HttpStatus.OK);
     }

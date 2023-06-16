@@ -6,6 +6,7 @@ import com.example.issue_tracker_backend.model.User;
 import com.example.issue_tracker_backend.repository.TicketRepository;
 import com.example.issue_tracker_backend.repository.UserRepository;
 
+import jakarta.persistence.EntityExistsException;
 import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,7 +30,7 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
     }
 
     public void createUser(User user) {
-        if (userRepository.existsById(user.getUsername())){
+        if (userRepository.existsById(user.getUsername())) {
             throw new IllegalArgumentException("Username already in use!");
         }
 
@@ -41,7 +42,7 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
     }
 
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return userRepository.findById(username).orElseThrow(EntityExistsException::new);
     }
 
     public User findByEmail(String email) {
@@ -56,11 +57,8 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
-        if (user != null) {
-            return new UserDetailsImplementation(user);
-        } else {
-            throw new UsernameNotFoundException("Invalid username or password");
-        }
+        User user = userRepository.findById(username).orElseThrow(EntityExistsException::new);
+
+        return new UserDetailsImplementation(user);
     }
 }

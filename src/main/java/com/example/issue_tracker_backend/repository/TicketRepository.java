@@ -12,5 +12,5 @@ import java.util.List;
 public interface TicketRepository extends CrudRepository<Ticket, Long> {
     List<Ticket> findAllByAssignedTo(User creator);
 
-    List<Ticket> findAllByProjectId(Long id);
+    List<Ticket> findAllByProjectTitle(String title);
 }

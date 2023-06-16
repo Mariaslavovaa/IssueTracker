@@ -15,17 +15,6 @@ import java.util.Set;
 @AllArgsConstructor
 public class Project {
     @Id
-    @SequenceGenerator(
-            name = "project_sequence",
-            sequenceName = "project_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "project_sequence"
-    )
-    private Long id;
-
     @Column(name = "Title", nullable = false)
     private String title;
 
@@ -33,7 +22,7 @@ public class Project {
     @ManyToMany()
     @JoinTable(
             name = "accessed_project",
-            joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"),
+            joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "title"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "username")
     )
     private Set<User> usersWithAccess = new HashSet<>();
