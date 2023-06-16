@@ -60,14 +60,14 @@ export class DropListComponent {
         case 'cdk-drop-list-2':
           this.changeStatus(
             event.container.data[0],
-            Status.done,
+            Status.review,
             this.username
           );
           break;
         case 'cdk-drop-list-3':
           this.changeStatus(
             event.container.data[0],
-            Status.review,
+            Status.done,
             this.username
           );
           break;
@@ -77,7 +77,6 @@ export class DropListComponent {
 
   changeStatus(ticket: IssueTicket, status: Status, username: String) {
     ticket.status = status;
-    this.issueTicketService.changeTicket(ticket);
     this.issueTicketService.changeStatus(ticket, username);
   }
 
