@@ -1,5 +1,6 @@
 package com.example.issue_tracker_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +22,8 @@ public class User {
     @Id
     @Column(name = "username", nullable = false, unique = true)
     String username;
+
+    @JsonIgnore
     @Column(name = "password", nullable = false)
     String password;
 
