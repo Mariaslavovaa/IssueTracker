@@ -28,6 +28,16 @@ export class IssueTicketService {
     });
   }
 
+  changeStatus(ticket: IssueTicket, username: String) {
+    this.http
+      .put<IssueTicket>(`/api/tickets/${ticket.id}/${username}`, ticket)
+      .subscribe({
+        // nz dali moje taka
+        next: (updatedTicket) => console.log('Ticket updated:', updatedTicket),
+        error: (error) => console.error('Error updating ticket:', error),
+      });
+  }
+
   deleteTicket(ticketId: number) {
     //!!!!!!!! to do: remove console log
     this.http.delete<IssueTicket>(`/api/tickets/${ticketId}`).subscribe({
@@ -36,8 +46,8 @@ export class IssueTicketService {
     });
   }
 
-  //  createIssueTicket(issueTicket: IssueTicket): Observable<IssueTicket> {
-  //     const url = `${this.baseUrl}/issuetickets`;
-  //     return this.http.post<IssueTicket>(url, issueTicket);
-  //   }
+  createTicket(issueTicket: IssueTicket) {
+    const url = `${this.baseUrl}/issuetickets`;
+    return this.http.post<IssueTicket>(url, issueTicket);
+  }
 }

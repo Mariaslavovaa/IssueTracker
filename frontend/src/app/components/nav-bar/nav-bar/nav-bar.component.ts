@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/service/token-service.service';
+import { AddNewTicketComponent } from '../../add-new-ticket/add-new-ticket.component';
 
 @Component({
   selector: 'nav-bar',
@@ -8,10 +10,21 @@ import { TokenStorageService } from 'src/app/service/token-service.service';
   styleUrls: ['./nav-bar.component.css'],
 })
 export class NavBarComponent {
-  constructor(private readonly tokenService: TokenStorageService, private readonly router: Router){}
+  @Output() isFormOpen = new EventEmitter<boolean>(false); //: boolean = false;
 
-  logout(){
+  constructor(
+    private readonly tokenService: TokenStorageService,
+    private readonly router: Router,
+    private dialogRef: MatDialog
+  ) {}
+
+  addNewTicket() {
+    this.isFormOpen.emit(true);
+    this.dialogRef.open(AddNewTicketComponent);
+  }
+
+  logout() {
     this.tokenService.signOut();
-    this.router.navigateByUrl("/login")
+    this.router.navigateByUrl('/login');
   }
 }

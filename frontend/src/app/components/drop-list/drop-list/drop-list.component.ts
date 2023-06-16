@@ -10,6 +10,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditWindowComponent } from '../../edit-window/edit-window/edit-window.component';
 import { Output, EventEmitter } from '@angular/core';
 import { IssueTicketService } from 'src/app/service/issues-service';
+import { isFormOpenService } from 'src/app/service/is-form-open-service';
+import { TokenStorageService } from 'src/app/service/token-service.service';
 
 @Component({
   selector: 'drop-list',
@@ -23,8 +25,8 @@ export class DropListComponent {
   review: IssueTicket[] = [];
   done: IssueTicket[] = [];
   private issueTicketService: IssueTicketService;
-
-  @Output() isFormOpen = new EventEmitter<boolean>(false); //: boolean = false;
+  private isFormOpenService: isFormOpenService;
+  private username: String;
 
   drop(event: CdkDragDrop<IssueTicket[]>) {
     if (event.previousContainer === event.container) {
@@ -42,27 +44,56 @@ export class DropListComponent {
       );
       switch (event.container.id) {
         case 'cdk-drop-list-0':
-          this.changeStatus(event.container.data[0], Status.todo);
+          this.changeStatus(
+            event.container.data[0],
+            Status.todo,
+            this.username
+          );
           break;
         case 'cdk-drop-list-1':
-          this.changeStatus(event.container.data[0], Status.inprogress);
+          this.changeStatus(
+            event.container.data[0],
+            Status.inprogress,
+            this.username
+          );
           break;
         case 'cdk-drop-list-2':
-          this.changeStatus(event.container.data[0], Status.done);
+          this.changeStatus(
+            event.container.data[0],
+            Status.done,
+            this.username
+          );
           break;
         case 'cdk-drop-list-3':
-          this.changeStatus(event.container.data[0], Status.review);
+          this.changeStatus(
+            event.container.data[0],
+            Status.review,
+            this.username
+          );
           break;
       }
     }
   }
 
-  changeStatus(ticket: IssueTicket, status: Status) {
+  changeStatus(ticket: IssueTicket, status: Status, username: String) {
     ticket.status = status;
     this.issueTicketService.changeTicket(ticket);
+    this.issueTicketService.changeStatus(ticket, username);
   }
 
-  constructor(private dialogRef: MatDialog) {}
+  constructor(
+    private dialogRef: MatDialog,
+    issueTicketService: IssueTicketService,
+    isFormOpenService: isFormOpenService,
+    private tokenStorage: TokenStorageService
+  ) {
+    var temp = tokenStorage.getUsername();
+    if (temp) {
+      this.username = temp;
+    }
+    this.issueTicketService = issueTicketService;
+    this.isFormOpenService = isFormOpenService;
+  }
 
   ngOnChanges() {
     this.allIssues.forEach((issue) => {
@@ -84,7 +115,8 @@ export class DropListComponent {
   }
 
   openDialog(ticket: IssueTicket) {
-    this.isFormOpen.emit(true);
+    this.isFormOpenService.openForm(true);
+
     this.dialogRef.open(EditWindowComponent, {
       data: { ticket },
     });
