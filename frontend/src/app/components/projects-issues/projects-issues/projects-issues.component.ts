@@ -16,7 +16,14 @@ export class ProjectsIssuesComponent {
     private ProjectService: ProjectService,
     private isFormOpenService: isFormOpenService
   ) {
-    this.ProjectService.getProjects();
+    this.ProjectService.getProjects().subscribe({
+      next: (projects) => {
+        this.projects = projects;
+      },
+      error: (err) => {
+        
+      }
+    });
   }
 
   ngOnInit() {

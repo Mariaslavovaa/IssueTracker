@@ -25,6 +25,7 @@ public class TicketRestController {
         for (Ticket ticket : tickets) {
             ticketsDto.add(ticketService.entityToDto(ticket));
         }
+        System.out.println(ticketsDto.size());
         return new ResponseEntity<>(ticketsDto, HttpStatus.OK);
     }
 

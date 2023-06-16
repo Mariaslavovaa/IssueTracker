@@ -17,7 +17,11 @@ export class AssigneeIssuesComponent {
     private UserService: UserService,
     private IsFormOpenService: isFormOpenService
   ) {
-    this.users = this.UserService.getAllUsers();
+    this.UserService.getAllUsers().subscribe({
+      next: (users) => {
+        this.users = users;
+      }
+    })
   }
 
   ngOnInit() {
