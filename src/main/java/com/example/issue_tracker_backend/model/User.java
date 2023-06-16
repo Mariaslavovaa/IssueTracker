@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -36,16 +37,11 @@ public class User {
     @Column(name = "email", nullable = false)
     String email;
 
-    @ManyToMany()
-    @JoinTable(
-            name = "accessed_project",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id")
-    )
-    private List<Project> projects = new ArrayList<>();
+    @ManyToMany(mappedBy = "usersWithAccess")
+    private Set<Project> projects = new HashSet<>();
 
     @OneToMany(mappedBy = "creator")
-    private Set<Ticket> tickets;
+    private Set<Ticket> tickets = new HashSet<>();
 
     public User(String username, String email, String password){
         this.username = username;
@@ -53,7 +49,7 @@ public class User {
         this.password = password;
 
     }
-    public void giveAccessToProject(Project project) {
-        projects.add(project);
+    public void removeProject(Project project){
+        projects.remove(project);
     }
 }

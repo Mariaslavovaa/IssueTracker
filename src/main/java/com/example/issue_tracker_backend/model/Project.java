@@ -5,9 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -31,12 +29,23 @@ public class Project {
     @Column(name = "Title", nullable = false)
     private String title;
 
-    @ManyToMany(mappedBy = "projects")
+
+    @ManyToMany()
+    @JoinTable(
+            name = "accessed_project",
+            joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
+    )
     private Set<User> usersWithAccess = new HashSet<>();
 
     @OneToMany(mappedBy = "project")
-    private Set<Ticket> tickets;
-    public Project(String title){
+    private Set<Ticket> tickets = new HashSet<>();
+
+    public Project(String title) {
         this.title = title;
+    }
+
+    public void giveAccessToUser(User user) {
+        usersWithAccess.add(user);
     }
 }

@@ -6,6 +6,7 @@ import com.example.issue_tracker_backend.model.User;
 import com.example.issue_tracker_backend.repository.ProjectRepository;
 import com.example.issue_tracker_backend.repository.TicketRepository;
 import com.example.issue_tracker_backend.repository.UserRepository;
+import com.example.issue_tracker_backend.service.ProjectServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -21,19 +22,25 @@ public class DataGenerator {
     private PasswordEncoder passwordEncoder;
 
     @Bean
-    CommandLineRunner commandLineRunner(TicketRepository ticketRepository, UserRepository userRepository, ProjectRepository projectRepository){
+    CommandLineRunner commandLineRunner(TicketRepository ticketRepository, UserRepository userRepository, ProjectRepository projectRepository, ProjectServiceImplementation projectServiceImplementation){
         return args -> {
 
             Project project1 = new Project("Project1");
             projectRepository.save(project1);
 
+            Project project2 = new Project("Project2");
+            projectRepository.save(project2);
+
             User user = new User("batsanov", "batsanov1@test.test", passwordEncoder.encode("123"));
-            user.giveAccessToProject(project1);
             userRepository.save(user);
 
+
             User user1 = new User("batsanov1", "batsanov2@test.test", passwordEncoder.encode("123"));
-            user1.giveAccessToProject(project1);
             userRepository.save(user1);
+
+            project1.giveAccessToUser(user);
+            project1.giveAccessToUser(user1);
+            projectRepository.save(project1);
 
             User user2 = new User("batsanov2", "batsanov3@test.test", passwordEncoder.encode("123"));
             userRepository.save(user2);
@@ -45,8 +52,10 @@ public class DataGenerator {
             Ticket ticket2 = new Ticket( "defect2", "Defect2",user, user2, project1);
             ticketRepository.save(ticket2);
 
-            Ticket ticket3 = new Ticket( "defect3", "Defect3",user,null, project1);
+            Ticket ticket3 = new Ticket( "defect3", "Defect3",user,null, project2);
             ticketRepository.save(ticket3);
+
+           // projectServiceImplementation.deleteById(project1.getId());
 
         };
     }
