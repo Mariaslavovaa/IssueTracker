@@ -57,11 +57,12 @@ public class Ticket {
         this.assignedTo = assignedTo;
         this.project = project;
     }
-    public Ticket(String title, String description, User creator,Status status, User assignedTo, Project project) {
+
+    public Ticket(String title, String description, User creator, Status status, User assignedTo, Project project) {
         this.title = title;
         this.description = description;
         this.creator = creator;
-        this.status = Status.TO_DO;
+        this.status = status;
         this.dateOfCreation = LocalDate.now();
         this.assignedTo = assignedTo;
         this.project = project;
