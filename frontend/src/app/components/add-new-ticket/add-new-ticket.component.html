@@ -1,5 +1,5 @@
 <form #itemForm="ngForm" class="example-form">
-  <p>Edit Ticket</p>
+  <p>New Ticket</p>
   <mat-form-field class="form-field" id="first">
     <input
       matInput
@@ -8,7 +8,6 @@
       placeholder="Title"
       name="ticketTitle"
       [(ngModel)]="ticket.title"
-      value="{{ ticket.title }}"
       ngModel
     />
     <mat-hint align="end">{{ inputTitle.value.length }}/50</mat-hint>
@@ -22,7 +21,6 @@
       name="ticketDescription"
       placeholder="Description"
       [(ngModel)]="ticket.description"
-      value="{{ ticket.description }}"
     ></textarea>
     <mat-hint align="end">{{ input.value.length }}/250</mat-hint>
   </mat-form-field>
@@ -36,7 +34,6 @@
       name="ticketAssigned"
       placeholder="Name"
       [(ngModel)]="ticket.assignedTo"
-      value="{{ ticket.assignedTo }}"
     />
     <mat-hint align="end">{{ inputAssigned.value.length }}/30</mat-hint>
   </mat-form-field>
@@ -50,22 +47,17 @@
       name="ticketProject"
       placeholder="Project name"
       [(ngModel)]="ticket.project"
-      value="{{ ticket.project }}"
     />
     <mat-hint align="end">{{ inputProject.value.length }}/30</mat-hint>
   </mat-form-field>
 
-  <label>Creator of ticket: {{ ticket.creator }}</label>
+  <label>Creator of ticket: {{ username }}</label>
 
-  <label
-    >Date of creation:
-    {{ ticket.dateOfCreation.toLocaleDateString("en-GB") }}</label
-  >
-  <button id="btnSave" (click)="saveTicket()" (click)="closeDialog()">
-    Save Changes
+  <label>Date of creation: {{ date.toLocaleDateString("en-GB") }}</label>
+  <button id="btnSave" (click)="saveTicket()" matDialogClose>
+    Save Ticket
   </button>
-  <button id="btnDel" (click)="deleteTicket()" (click)="closeDialog()">
-    Delete Ticket
-  </button>
-  <button id="btnCancel" (click)="closeDialog()">Cancel</button>
+  <button id="btnCancel" matDialogClose>Cancel</button>
+
+  <!--(click)="saveTicket()" -->
 </form>

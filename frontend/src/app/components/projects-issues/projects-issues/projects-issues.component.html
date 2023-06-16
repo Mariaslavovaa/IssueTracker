@@ -1,11 +1,8 @@
-<nav-bar></nav-bar>
+<!-- <nav-bar></nav-bar> -->
 <div *ngIf="!isFormOpen">
-  <!-- <nav-bar></nav-bar> -->
+  <nav-bar></nav-bar>
   <div *ngFor="let project of projects">
     <p>{{ project.title }}</p>
-    <drop-list
-      [allIssues]="project.allIssues"
-      (isFormOpen)="isOpen($event)"
-    ></drop-list>
+    <drop-list [allIssues]="project.allIssues"></drop-list>
   </div>
 </div>

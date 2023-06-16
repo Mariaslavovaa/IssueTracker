@@ -1,4 +1,3 @@
-
 .signup-page {
   width: 500px;
   padding: 4% 0 0;
@@ -17,31 +16,30 @@
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 
-.form p{
-  font-size:large;
+.form p {
+  font-size: large;
   font-weight: bold;
-} 
+}
 
 .form input {
-  
   background: #f2f2f2;
   width: 100%;
   border: 0;
   padding: 15px;
   box-sizing: border-box;
   font-size: 14px;
-  border-radius:10px;
-} 
+  border-radius: 10px;
+}
 .form button {
   font-family: "Titillium Web", sans-serif;
   font-size: 14px;
   font-weight: bold;
-  letter-spacing: .1em;
+  letter-spacing: 0.1em;
   outline: 0;
   background: 0 8px 32px 0 rgba(44, 55, 218, 0.811);
   width: 100%;
   border: 0;
-  border-radius:30px;
+  border-radius: 30px;
   margin: 0px 0px 8px;
   padding: 15px;
   color: #0074bc;
@@ -51,9 +49,9 @@
   transition: all 0.2s;
 }
 
-.form button:hover,.form button:focus { 
+.form button:hover,
+.form button:focus {
   background: #64b3de;
-    box-shadow: 0 5px 10px rgba(231, 235, 236, 0.966);
+  box-shadow: 0 5px 10px rgba(231, 235, 236, 0.966);
   transform: translateY(-4px);
 }
-

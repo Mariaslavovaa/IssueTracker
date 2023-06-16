@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IssueTicket } from 'src/app/models/issue-ticket-model';
 import { User } from 'src/app/models/user-model';
+import { isFormOpenService } from 'src/app/service/is-form-open-service';
 import { UserService } from 'src/app/service/user-service';
 
 @Component({
@@ -10,14 +11,18 @@ import { UserService } from 'src/app/service/user-service';
 })
 export class AssigneeIssuesComponent {
   users: User[] = [];
+  isFormOpen: boolean = false;
 
-  constructor(private UserService: UserService) {
+  constructor(
+    private UserService: UserService,
+    private IsFormOpenService: isFormOpenService
+  ) {
     this.users = this.UserService.getAllUsers();
   }
 
-  isFormOpen: boolean = false;
-
-  isOpen(isFOpen: boolean) {
-    this.isFormOpen = isFOpen;
+  ngOnInit() {
+    this.IsFormOpenService.childEventListner().subscribe((info) => {
+      this.isFormOpen = info;
+    });
   }
 }

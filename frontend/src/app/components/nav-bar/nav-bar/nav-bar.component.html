@@ -1,6 +1,6 @@
-
 <mat-toolbar>
   <h1 class="h1">Issue Tracker</h1>
+
   <button
     mat-raised-button
     class="btn-all"
@@ -28,6 +28,10 @@
     ariaCurrentWhenActive="page"
   >
     Assaignee Issues
+  </button>
+
+  <button mat-raised-button class="btn-newTicket" (click)="addNewTicket()">
+    Create Ticket
   </button>
 
   <button mat-fab extended class="btn-logout" (click)="logout()">

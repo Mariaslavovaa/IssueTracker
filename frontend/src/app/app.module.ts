@@ -28,6 +28,7 @@ import { AuthInterceptorProviders } from './utils/auth.interceptor';
 import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AddNewTicketComponent } from './components/add-new-ticket/add-new-ticket.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SignupComponent,
     LoginComponent,
     SignupComponent,
+    AddNewTicketComponent,
   ],
   imports: [
     BrowserModule,
