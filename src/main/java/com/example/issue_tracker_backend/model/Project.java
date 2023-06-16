@@ -5,9 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,26 +15,26 @@ import java.util.Set;
 @AllArgsConstructor
 public class Project {
     @Id
-    @SequenceGenerator(
-            name = "project_sequence",
-            sequenceName = "project_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "project_sequence"
-    )
-    private Long id;
-
     @Column(name = "Title", nullable = false)
     private String title;
 
-    @ManyToMany(mappedBy = "projects")
+
+    @ManyToMany()
+    @JoinTable(
+            name = "accessed_project",
+            joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "title"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "username")
+    )
     private Set<User> usersWithAccess = new HashSet<>();
 
     @OneToMany(mappedBy = "project")
-    private Set<Ticket> tickets;
-    public Project(String title){
+    private Set<Ticket> tickets = new HashSet<>();
+
+    public Project(String title) {
         this.title = title;
+    }
+
+    public void giveAccessToUser(User user) {
+        usersWithAccess.add(user);
     }
 }

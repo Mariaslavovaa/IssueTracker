@@ -45,7 +45,7 @@
             required
             placeholder="Confirm password"
             [(ngModel)]="form.confirm_password"
-            [type]="hide ? 'password' : 'text'"
+            [type]="hideConfirmation ? 'password' : 'text'"
           />
           <mat-icon (click)="hideConfirmation = !hideConfirmation">{{
             hideConfirmation ? "visibility_off" : "visibility"

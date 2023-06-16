@@ -34,18 +34,18 @@ public class Ticket {
     @Column(name = "Description", nullable = false)
     private String description;
     @ManyToOne()
-    @JoinColumn(name = "Creator", referencedColumnName = "id")
+    @JoinColumn(name = "Creator", referencedColumnName = "username")
     private User creator;
 
     @ManyToOne()
-    @JoinColumn(name = "AssignedTo", referencedColumnName = "id")
+    @JoinColumn(name = "AssignedTo", referencedColumnName = "username")
     private User assignedTo;
 
     @Column(name = "DateOfCreation", nullable = false)
     private LocalDate dateOfCreation;
 
     @ManyToOne()
-    @JoinColumn(name = "project_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "project_id", referencedColumnName = "title", nullable = false)
     private Project project;
 
     public Ticket(String title, String description, User creator, User assignedTo, Project project) {
@@ -53,6 +53,16 @@ public class Ticket {
         this.description = description;
         this.creator = creator;
         this.status = Status.TO_DO;
+        this.dateOfCreation = LocalDate.now();
+        this.assignedTo = assignedTo;
+        this.project = project;
+    }
+
+    public Ticket(String title, String description, User creator, Status status, User assignedTo, Project project) {
+        this.title = title;
+        this.description = description;
+        this.creator = creator;
+        this.status = status;
         this.dateOfCreation = LocalDate.now();
         this.assignedTo = assignedTo;
         this.project = project;

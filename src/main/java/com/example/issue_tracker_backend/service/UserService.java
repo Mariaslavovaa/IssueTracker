@@ -1,10 +1,8 @@
 package com.example.issue_tracker_backend.service;
 
 import com.example.issue_tracker_backend.model.User;
-import com.example.issue_tracker_backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
