@@ -19,16 +19,6 @@ import java.util.Set;
 @AllArgsConstructor
 public class User {
     @Id
-    @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
-    )
-    private Long id;
     @Column(name = "username", nullable = false, unique = true)
     String username;
     @Column(name = "password", nullable = false)
@@ -48,8 +38,5 @@ public class User {
         this.email = email;
         this.password = password;
 
-    }
-    public void removeProject(Project project){
-        projects.remove(project);
     }
 }

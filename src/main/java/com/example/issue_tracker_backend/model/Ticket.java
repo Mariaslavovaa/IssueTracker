@@ -34,11 +34,11 @@ public class Ticket {
     @Column(name = "Description", nullable = false)
     private String description;
     @ManyToOne()
-    @JoinColumn(name = "Creator", referencedColumnName = "id")
+    @JoinColumn(name = "Creator", referencedColumnName = "username")
     private User creator;
 
     @ManyToOne()
-    @JoinColumn(name = "AssignedTo", referencedColumnName = "id")
+    @JoinColumn(name = "AssignedTo", referencedColumnName = "username")
     private User assignedTo;
 
     @Column(name = "DateOfCreation", nullable = false)

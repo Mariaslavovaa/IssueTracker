@@ -34,7 +34,7 @@ public class Project {
     @JoinTable(
             name = "accessed_project",
             joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "username")
     )
     private Set<User> usersWithAccess = new HashSet<>();
 

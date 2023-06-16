@@ -29,6 +29,10 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
     }
 
     public void createUser(User user) {
+        if (userRepository.existsById(user.getUsername())){
+            throw new IllegalArgumentException("Username already in use!");
+        }
+
         User newUser = new User();
         newUser.setUsername(user.getUsername());
         newUser.setEmail(user.getEmail());
