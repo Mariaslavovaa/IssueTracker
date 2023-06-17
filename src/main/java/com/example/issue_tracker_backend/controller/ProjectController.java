@@ -6,6 +6,7 @@ import com.example.issue_tracker_backend.model.Project;
 import com.example.issue_tracker_backend.model.Ticket;
 import com.example.issue_tracker_backend.service.ProjectService;
 import com.example.issue_tracker_backend.service.TicketService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,4 +49,10 @@ public class ProjectController {
     ResponseEntity<List<Project>> getAllProjects() {
         return new ResponseEntity<>(projectService.getAllProjects(), HttpStatus.OK);
     }
+
+    @DeleteMapping("projects/{title}")
+    public void deleteProject(@PathVariable("title") String title){
+        projectService.deleteByTitle(title);
+    }
+
 }

@@ -16,7 +16,7 @@ export class SignupComponent {
   hide = true
   hideConfirmation = true
   signupUser?: SignupUser
-  constructor(private readonly signupService: SignupService, private router: Router) {console.log("top konop") }
+  constructor(private readonly signupService: SignupService, private router: Router) { }
 
   form: any = {
     email: null,
@@ -28,45 +28,14 @@ export class SignupComponent {
   success = false;
 
   signup() {
-    console.log("Creating")
     const signupData = { email: this.form.email, username: this.form.username, password: this.form.password, confirm_password: this.form.confirm_password };
     this.signupService.createUser(signupData).subscribe(response => {
       if (response) {
         alert("You have successfully registered")
         this.signupUser = response;
-        //this.router.navigateByUrl("/login")
+        this.router.navigateByUrl("/login")
       }
     })
   }
 
 }
-
-
-// form: any = {
-//   email: null,
-//   username: null,
-//   password: null,
-//   confirm_password: null
-// };
-// errorMessage = "";
-// success = false;
-
-// constructor(private http: HttpClient) {}
-
-// signup() {
-//   const signupData = { email: this.form.email, username: this.form.username, password: this.form.password, confirm_password: this.form.confirm_password };
-//   this.http.post(api, signupData, httpOptions).subscribe({
-//     next: (data : any)  => {
-//       this.success = true;
-//       window.location.assign("/login");
-//     },
-//     error: err => {
-//       if (err != null && err.error != null) {
-//         this.errorMessage = err.error;
-//       } else {
-//         this.errorMessage = "Error signing up";
-//       }
-//       this.success = false;
-//     }
-//   });
-// }

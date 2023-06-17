@@ -17,7 +17,13 @@ export class AddNewProjectComponent {
   }
 
   saveProject() {
-    this.projectService.createProject(this.project);
+    this.projectService.createProject(this.project).subscribe(response => {
+      if(response){
+        alert("You have syccessfuly create project!")
+        this.project = response;
+      }
+    });
+    window.location.assign("/projects-issues")
   }
 
 }

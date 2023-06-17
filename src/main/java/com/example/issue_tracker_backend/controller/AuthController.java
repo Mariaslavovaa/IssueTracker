@@ -35,17 +35,9 @@ public class AuthController {
 
     @PostMapping("/signup")
     public ResponseEntity<?> signupSave(@RequestBody SignupRequest signupRequest) {
-        User user = userService.findByUsername(signupRequest.getUsername());
-        if (user != null) {
-            return ResponseEntity.badRequest().body("Username already taken");
-        }
-        user = userService.findByEmail(signupRequest.getEmail());
-        if (user != null) {
-            return ResponseEntity.badRequest().body("Email already in use");
-        }
         User newUser = new User(signupRequest.getUsername(), signupRequest.getEmail(), signupRequest.getPassword());
         userService.createUser(newUser);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(newUser);
     }
 
     @PostMapping("/login")
