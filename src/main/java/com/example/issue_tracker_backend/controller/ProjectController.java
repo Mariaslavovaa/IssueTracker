@@ -53,4 +53,10 @@ public class ProjectController {
     ResponseEntity<List<Project>> getAllProjects() {
         return new ResponseEntity<>(projectService.getAllProjects(), HttpStatus.OK);
     }
+
+    @DeleteMapping("projects/{title}")
+    public void deleteProject(@PathVariable("title") String title){
+        projectService.deleteByTitle(title);
+    }
+
 }

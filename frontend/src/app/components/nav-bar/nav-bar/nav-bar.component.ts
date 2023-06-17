@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/service/token-service.service';
 import { AddNewTicketComponent } from '../../add-new-ticket/add-new-ticket.component';
+import { AddNewProjectComponent } from '../../add-new-project/add-new-project.component';
+
 
 @Component({
   selector: 'nav-bar',
@@ -21,6 +23,11 @@ export class NavBarComponent {
   addNewTicket() {
     this.isFormOpen.emit(true);
     this.dialogRef.open(AddNewTicketComponent);
+  }
+
+  addNewProject() {
+    this.isFormOpen.emit(true);
+    this.dialogRef.open(AddNewProjectComponent);
   }
 
   logout() {

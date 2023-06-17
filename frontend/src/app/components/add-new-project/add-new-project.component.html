@@ -1,0 +1,22 @@
+<form #itemForm="ngForm" class="example-form">
+    <p class="title">Create New Project</p>
+    <mat-form-field class="form-field" id="first">
+        <input
+          matInput
+          #inputTitle
+          maxlength="50"
+          placeholder="Enter title"
+          name="projectTitle"
+          [(ngModel)]="project.title"
+          ngModel
+        />
+        <mat-hint align="end">{{ inputTitle.value.length }}/50</mat-hint>
+    </mat-form-field>
+
+    <button id="btnSave" (click)="saveProject()" matDialogClose>
+        Save Project
+    </button>
+    <button id="btnCancel" matDialogClose>Cancel</button>
+    <p>If you want to add a ticket please use create ticket.</p>
+</form>
+

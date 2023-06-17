@@ -2,7 +2,9 @@
 <div *ngIf="!isFormOpen">
   <nav-bar></nav-bar>
   <div *ngFor="let project of projects">
-    <p>{{ project.title }}</p>
+    <p>{{ project.title }}
+    </p>
+    <button mat-icon-button (click)="this.deleteProject(project)"> <mat-icon class="deleteButton" >delete</mat-icon> </button>
     <drop-list [allIssues]="project.allIssues"></drop-list>
   </div>
 </div>

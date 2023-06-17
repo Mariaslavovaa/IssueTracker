@@ -35,8 +35,7 @@ public class ProjectServiceImplementation implements ProjectService {
 
     @Override
     public Project dtoToEntity(ProjectDto projectDto) {
-        Project project = projectRepository.findById(projectDto.getTitle()).orElseThrow(EntityExistsException::new);
-        return new Project(project.getTitle());
+        return new Project(projectDto.getTitle());
     }
 
     @Override

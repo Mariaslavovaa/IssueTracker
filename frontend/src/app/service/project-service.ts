@@ -14,4 +14,15 @@ export class ProjectService {
     const url = `${environment.restApi}/projects/all`;
     return this.http.get<Project[]>(url);
   }
+
+  createProject(project: Project) {
+    const url = `${environment.restApi}/private/api/projects`;
+    return this.http.post<Project>(url, project);
+  }
+
+  deleteProject(project: Project) : Observable<any>{
+    return this.http.delete(`${environment.restApi}/projects/${project.title}`);
+  }
+
+
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { finalize } from 'rxjs';
 import { Project } from 'src/app/models/project-model';
 import { isFormOpenService } from 'src/app/service/is-form-open-service';
 import { ProjectService } from 'src/app/service/project-service';
@@ -27,8 +28,21 @@ export class ProjectsIssuesComponent {
   }
 
   ngOnInit() {
+    this.ProjectService.getProjects().subscribe({
+      next: (projects) => {
+        this.projects = projects;
+      },
+      error: (err) => {
+        
+      }
+    });
     this.isFormOpenService.childEventListner().subscribe((info) => {
       this.isFormOpen = info;
     });
+  }
+
+  deleteProject(project: Project){
+    this.ProjectService.deleteProject(project).subscribe(() => {alert(project.title + " successfully deleted")})
+    window.location.assign("/projects-issues")
   }
 }
