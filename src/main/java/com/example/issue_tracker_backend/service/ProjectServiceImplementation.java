@@ -1,10 +1,7 @@
 package com.example.issue_tracker_backend.service;
 
 import com.example.issue_tracker_backend.dtos.ProjectDto;
-import com.example.issue_tracker_backend.dtos.TicketDto;
 import com.example.issue_tracker_backend.model.Project;
-import com.example.issue_tracker_backend.model.Ticket;
-import com.example.issue_tracker_backend.model.User;
 import com.example.issue_tracker_backend.repository.ProjectRepository;
 import com.example.issue_tracker_backend.repository.TicketRepository;
 import jakarta.persistence.EntityExistsException;
