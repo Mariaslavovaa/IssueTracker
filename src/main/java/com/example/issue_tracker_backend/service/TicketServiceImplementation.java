@@ -50,7 +50,7 @@ public class TicketServiceImplementation implements TicketService {
     }
 
     public TicketDto entityToDto(Ticket ticket) {
-        return new TicketDto(ticket.getTitle(), ticket.getStatus(),
+        return new TicketDto(ticket.getId(), ticket.getTitle(), ticket.getStatus(),
                 ticket.getDescription(), ticket.getCreator().getUsername(), ticket.getAssignedTo().getUsername(), ticket.getDateOfCreation(), ticket.getProject().getTitle());
     }
 

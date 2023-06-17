@@ -2,7 +2,6 @@ package com.example.issue_tracker_backend.model;
 
 import com.example.issue_tracker_backend.utils.Status;
 import jakarta.persistence.*;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

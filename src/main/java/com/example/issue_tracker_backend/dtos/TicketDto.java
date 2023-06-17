@@ -9,6 +9,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TicketDto {
+
+    public Long id;
     private String title;
     private Status status;
     private String description;

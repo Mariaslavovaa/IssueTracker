@@ -11,16 +11,16 @@ import { TokenStorageService } from 'src/app/service/token-service.service';
 })
 export class AllIssuesComponent {
   allIssues: IssueTicket[] = [
-    new IssueTicket(
-      123,
-      'Issue1',
-      'Description',
-      Status.inprogress,
-      'Ivan',
-      'Ivan',
-      new Date(),
-      'Project1'
-    ),
+    // new IssueTicket(
+    //   123,
+    //   'Issue1',
+    //   'Description',
+    //   Status.inprogress,
+    //   'Ivan',
+    //   'Ivan',
+    //   new Date(),
+    //   'Project1'
+    // ),
   ];
 
   isFormOpen: boolean = false;
@@ -30,7 +30,9 @@ export class AllIssuesComponent {
     private tokenStorage: TokenStorageService,
     private isFormOpenService: isFormOpenService
   ) {
-    //this.issueTicketService.getAllTicketsCurrUser(tokenStorage.getUsername());
+    this.issueTicketService.getAllTicketsCurrUser(tokenStorage.getUsername()).subscribe((issueTickets) => {
+      this.allIssues = issueTickets;
+    });
   }
 
   ngOnInit() {
