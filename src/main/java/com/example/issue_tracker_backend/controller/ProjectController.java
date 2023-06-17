@@ -6,7 +6,7 @@ import com.example.issue_tracker_backend.model.Project;
 import com.example.issue_tracker_backend.model.Ticket;
 import com.example.issue_tracker_backend.service.ProjectService;
 import com.example.issue_tracker_backend.service.TicketService;
-import lombok.extern.log4j.Log4j2;
+import jakarta.persistence.EntityExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,8 +41,12 @@ public class ProjectController {
 
     @PostMapping("private/api/projects")
     public ResponseEntity<ProjectDto> createProject(@RequestBody ProjectDto projectDto) {
-        return new ResponseEntity<>(projectService.entityToDto(projectService.createProject(
-                projectService.dtoToEntity(projectDto))), HttpStatus.CREATED);
+        try {
+            return new ResponseEntity<>(projectService.entityToDto(projectService.createProject(
+                    projectService.dtoToEntity(projectDto))), HttpStatus.CREATED);
+        } catch (EntityExistsException | IllegalArgumentException e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @GetMapping("projects/all")
