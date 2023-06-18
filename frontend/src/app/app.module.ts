@@ -22,7 +22,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { PortalModule } from '@angular/cdk/portal';
 import { EditWindowComponent } from './components/edit-window/edit-window/edit-window.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorProviders } from './utils/auth.interceptor';
 import { MatInputModule } from '@angular/material/input';
@@ -64,6 +64,7 @@ import { AddNewProjectComponent } from './components/add-new-project/add-new-pro
     HttpClientModule,
     EditWindowComponent,
     BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   exports: [
     FormsModule,

@@ -64,7 +64,6 @@ public class Security {
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).accessDeniedHandler(
                         ((request, response, accessDeniedException) -> {
-                            System.out.println("Here");
                         })
                 ).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()

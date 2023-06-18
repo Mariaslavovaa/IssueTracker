@@ -49,8 +49,8 @@
       maxlength="30"
       name="ticketProject"
       placeholder="Project name"
-      [(ngModel)]="ticket.project"
-      value="{{ ticket.project }}"
+      [(ngModel)]="ticket.projectTitle"
+      value="{{ ticket.projectTitle }}"
     />
     <mat-hint align="end">{{ inputProject.value.length }}/30</mat-hint>
   </mat-form-field>
@@ -59,7 +59,7 @@
 
   <label
     >Date of creation:
-    {{ ticket.dateOfCreation.toLocaleDateString("en-GB") }}</label
+    {{ ticket.dateOfCreation.toLocaleString("en-GB") }}</label
   >
   <button id="btnSave" (click)="saveTicket()" (click)="closeDialog()">
     Save Changes

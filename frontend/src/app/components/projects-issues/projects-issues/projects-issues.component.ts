@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { finalize } from 'rxjs';
+import { IssueTicket, Status } from 'src/app/models/issue-ticket-model';
 import { Project } from 'src/app/models/project-model';
 import { isFormOpenService } from 'src/app/service/is-form-open-service';
 import { ProjectService } from 'src/app/service/project-service';
@@ -16,16 +17,7 @@ export class ProjectsIssuesComponent {
   constructor(
     private ProjectService: ProjectService,
     private isFormOpenService: isFormOpenService
-  ) {
-    this.ProjectService.getProjects().subscribe({
-      next: (projects) => {
-        this.projects = projects;
-      },
-      error: (err) => {
-        
-      }
-    });
-  }
+  ) { }
 
   ngOnInit() {
     this.ProjectService.getProjects().subscribe({
@@ -33,7 +25,7 @@ export class ProjectsIssuesComponent {
         this.projects = projects;
       },
       error: (err) => {
-        
+        console.log(err)
       }
     });
     this.isFormOpenService.childEventListner().subscribe((info) => {
@@ -42,7 +34,8 @@ export class ProjectsIssuesComponent {
   }
 
   deleteProject(project: Project){
-    this.ProjectService.deleteProject(project).subscribe(() => {alert(project.title + " successfully deleted")})
-    window.location.assign("/projects-issues")
+    this.ProjectService.deleteProject(project).subscribe(() => {
+      window.location.reload();
+    })
   }
 }

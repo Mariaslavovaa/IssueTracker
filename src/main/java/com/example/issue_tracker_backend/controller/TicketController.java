@@ -34,7 +34,7 @@ public class TicketController {
         try {
             return new ResponseEntity<>(ticketService.entityToDto(ticketService
                     .createTicket(ticketService.dtoToEntity(ticketDto))), HttpStatus.CREATED);
-        } catch (EntityExistsException e) {
+        } catch (EntityExistsException | IllegalArgumentException e) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }

@@ -4,16 +4,16 @@
 
     <form (ngSubmit)="signup()" class="form">
       <mat-form-field class="form-element">
-        <input type="email" name="mail" required placeholder="Enter email" [(ngModel)]="form.email" />
+        <input email #this.forms.email="ngModel" matInput type="email" name="mail" required placeholder="Enter email" [(ngModel)]="form.email" />
       </mat-form-field>
 
       <mat-form-field class="form-element">
-        <input type="username" name="username" required placeholder="Enter username" [(ngModel)]="form.username" />
+        <input matInput type="username" name="username" required placeholder="Enter username" [(ngModel)]="form.username" />
       </mat-form-field>
 
       <mat-form-field class="form-element">
         <div>
-          <input matInput name= "password" required placeholder="Enter password" [(ngModel)]="form.password"
+          <input matInput name="password" required placeholder="Enter password" [(ngModel)]="form.password"
             [type]="hide ? 'password' : 'text'" />
           <mat-icon (click)="hide = !hide">{{
             hide ? "visibility_off" : "visibility"
@@ -24,13 +24,17 @@
       <mat-form-field class="form-element">
         <div>
           <input matInput name= "password" required placeholder="Confirm password" [(ngModel)]="form.confirm_password"
-            [type]="hideConfirmation ? 'password' : 'text'" />
+            [type]="hideConfirmation ? 'password' : 'text'"
+            [ngClass]="{'is-valid': !passwordsMatch()}"/>
           <mat-icon (click)="hideConfirmation = !hideConfirmation">{{
             hideConfirmation ? "visibility_off" : "visibility"
             }}</mat-icon>
+            <mat-error *ngIf="!passwordsMatch()">Passwords do not match.</mat-error>
         </div>
       </mat-form-field>
-
+      <div>
+        <p>{{ this.errorMessage }}</p>
+      </div>
       <div class="form-element">
         <button mat-raised-button color="primary" type="submit" class="button">
           Sign up

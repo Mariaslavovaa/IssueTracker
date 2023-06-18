@@ -10,6 +10,7 @@ import com.example.issue_tracker_backend.utils.JwtTokenGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -36,7 +37,11 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<?> signupSave(@RequestBody SignupRequest signupRequest) {
         User newUser = new User(signupRequest.getUsername(), signupRequest.getEmail(), signupRequest.getPassword());
-        userService.createUser(newUser);
+        try {
+            userService.createUser(newUser);
+        } catch (IllegalArgumentException ex) {
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
         return ResponseEntity.ok().body(newUser);
     }
 
