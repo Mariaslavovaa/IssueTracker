@@ -1,5 +1,6 @@
 package com.example.issue_tracker_backend.service;
 
+import com.example.issue_tracker_backend.dtos.ProjectDto;
 import com.example.issue_tracker_backend.dtos.TicketDto;
 import com.example.issue_tracker_backend.model.Project;
 import com.example.issue_tracker_backend.model.Ticket;
@@ -10,7 +11,9 @@ import com.example.issue_tracker_backend.repository.UserRepository;
 import jakarta.persistence.EntityExistsException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class TicketServiceImplementation implements TicketService {
@@ -34,6 +37,9 @@ public class TicketServiceImplementation implements TicketService {
         if (ticket.getAssignedTo() != null && userRepository.findByUsername(ticket.getAssignedTo().getUsername()) == null) {
             throw new IllegalArgumentException("Invalid username");
         }
+        Project project = projectRepository.findById(ticket.getProject().getTitle()).orElseThrow(IllegalArgumentException::new);
+        project.getTickets().add(ticket);
+        projectRepository.save(project);
         return repository.save(ticket);
     }
 
@@ -63,7 +69,6 @@ public class TicketServiceImplementation implements TicketService {
             assignedTo = userRepository.findById(ticketDto.getAssignedTo()).orElseThrow(EntityExistsException::new);
         }
         Project project = projectRepository.findById(ticketDto.getProjectTitle()).orElseThrow(EntityExistsException::new);
-
         return new Ticket(ticketDto.getTitle(), ticketDto.getDescription(), creator, ticketDto.getStatus(), assignedTo, project);
     }
 

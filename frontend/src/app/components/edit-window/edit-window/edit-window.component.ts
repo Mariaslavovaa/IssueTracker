@@ -29,8 +29,6 @@ export class EditWindowComponent {
   ticket: IssueTicket;
   private issueTicketService: IssueTicketService;
   private isFormOpenService: isFormOpenService;
-  allProjects: String[] = ['Project1', 'Project2', 'Project3'];
-  // selected: String = '';
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: IssueTicket,
@@ -44,14 +42,14 @@ export class EditWindowComponent {
   }
   saveTicket() {
     this.issueTicketService.changeTicket(this.ticket);
-    console.log(this.ticket);
     this.dialogRef.close();
+    window.location.reload();
   }
 
   deleteTicket() {
     this.issueTicketService.deleteTicket(this.ticket.id);
-    console.log(this.ticket);
     this.dialogRef.close();
+    window.location.reload();
   }
 
   closeDialog() {

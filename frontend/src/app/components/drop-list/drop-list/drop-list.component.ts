@@ -95,6 +95,9 @@ export class DropListComponent {
   }
 
   ngOnChanges() {
+    if (this.allIssues === undefined) {
+      return;
+    }
     this.allIssues.forEach((issue) => {
       switch (issue.status) {
         case Status.todo:
