@@ -15,29 +15,16 @@ export class IssueTicketService {
   }
 
   changeTicket(ticket: IssueTicket) {
-    //!!!!!!!! to do: remove console log
-    this.http.put<IssueTicket>(`${environment.restApi}/private/api/tickets/${ticket.id}`, ticket).subscribe({
-      next: (updatedTicket) => console.log('Ticket updated:', updatedTicket),
-      error: (error) => console.error('Error updating ticket:', error),
-    });
+    return this.http.put<IssueTicket>(`${environment.restApi}/private/api/tickets/${ticket.id}`, ticket)
   }
 
   changeStatus(ticket: IssueTicket, username: String) {
-    this.http
+    return this.http
       .put<IssueTicket>(`${environment.restApi}/private/api/tickets/${ticket.id}`, ticket)
-      .subscribe({
-        // nz dali moje taka
-        next: (updatedTicket) => console.log('Ticket updated:', updatedTicket),
-        error: (error) => console.error('Error updating ticket:', error),
-      });
   }
 
   deleteTicket(ticketId: number) {
-    //!!!!!!!! to do: remove console log
-    this.http.delete<IssueTicket>(`${environment.restApi}/private/api/tickets/${ticketId}`).subscribe({
-      next: () => console.log('Ticket deleted!'),
-      error: (error) => console.error('Error deleting ticket', error),
-    });
+    return this.http.delete<IssueTicket>(`${environment.restApi}/private/api/tickets/${ticketId}`)
   }
 
   createTicket(issueTicket: IssueTicket) {
