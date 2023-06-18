@@ -48,6 +48,7 @@ public class TicketServiceImplementation implements TicketService {
         Ticket found = repository.findById(id).orElseThrow(EntityExistsException::new);
         found.setStatus(ticket.getStatus());
         found.setCreator(ticket.getCreator());
+        found.setAssignedTo(ticket.getAssignedTo());
         found.setTitle(ticket.getTitle());
         found.setProject(ticket.getProject());
         found.setDateOfCreation(ticket.getDateOfCreation());

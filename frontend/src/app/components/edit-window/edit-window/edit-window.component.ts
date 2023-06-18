@@ -41,15 +41,20 @@ export class EditWindowComponent {
     this.ticket = Object.values(data)[0];
   }
   saveTicket() {
-    this.issueTicketService.changeTicket(this.ticket);
-    this.dialogRef.close();
-    window.location.reload();
+    this.issueTicketService.changeTicket(this.ticket).subscribe({
+      next: (updatedTicket) => { console.log('Ticket updated:', updatedTicket), window.location.reload() },
+      error: (error) => console.error('Error updating ticket:', error),
+    });
   }
 
   deleteTicket() {
-    this.issueTicketService.deleteTicket(this.ticket.id);
-    this.dialogRef.close();
-    window.location.reload();
+    this.issueTicketService.deleteTicket(this.ticket.id).subscribe({
+      next: () => {
+        console.log('Ticket deleted!')
+        window.location.reload();
+      },
+      error: (error) => console.error('Error deleting ticket', error),
+    });
   }
 
   closeDialog() {

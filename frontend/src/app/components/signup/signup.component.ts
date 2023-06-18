@@ -40,7 +40,6 @@ export class SignupComponent {
     this.signupService.createUser(signupData).subscribe({
       next: (response) => {
         if (response) {
-          alert("You have successfully registered");
           this.signupUser = response;
           this.router.navigateByUrl("/login")
         }
