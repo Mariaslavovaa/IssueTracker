@@ -17,13 +17,13 @@ export class TokenStorageService {
         return window.sessionStorage.getItem("SESSION");
     }
 
-    public getUsername(): string | null {
+    public getUsername(): string{
         const user = window.sessionStorage.getItem("USER");
         if (user != null) {
             const userObject = JSON.parse(user);
             return userObject.username;
         }
-        return null;
+        throw new Error("Not logged in")
     }
 
     public saveUser(user: any): void {
