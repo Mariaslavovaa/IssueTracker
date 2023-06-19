@@ -35,7 +35,7 @@ public class AuthController {
         try {
             userService.createUser(newUser);
         } catch (IllegalArgumentException ex) {
-            return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+            return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok().body(newUser);
     }
