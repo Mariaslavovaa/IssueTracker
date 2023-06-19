@@ -3,6 +3,7 @@ package com.example.issue_tracker_backend.controller;
 import com.example.issue_tracker_backend.model.User;
 import com.example.issue_tracker_backend.service.UserService;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,14 +15,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "users")
+@RequiredArgsConstructor
 public class UserController {
-    UserService userService;
-
-    @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
-
+    private final UserService userService;
 
     @GetMapping(path = "all")
     ResponseEntity<List<User>> getAllUsers() {

@@ -37,8 +37,8 @@ export class AddNewTicketComponent {
   }
 
   saveTicket() {
-    this.ticket.creator = this.username;
-    this.issueTicketService.createTicket(this.ticket);
-    console.log(this.ticket);
+    this.ticket.creator = this.username
+    this.issueTicketService.createTicket(this.ticket).subscribe(response => console.log("success"))
+    window.location.reload()
   }
 }

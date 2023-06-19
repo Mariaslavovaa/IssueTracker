@@ -48,20 +48,23 @@ public class DataGenerator {
             User user2 = new User("batsanov2", "batsanov3@test.test", passwordEncoder.encode("123"));
             userRepository.save(user2);
 
-            Ticket ticket1 = new Ticket("defect1", "Defect1", user, null, project1);
+            Ticket ticket1 = new Ticket("defect1", "Defect1", user, user1, project1);
 
             ticketRepository.save(ticket1);
 
             Ticket ticket2 = new Ticket("defect2", "Defect2", user, user2, project1);
             ticketRepository.save(ticket2);
 
-            Ticket ticket3 = new Ticket("defect3", "Defect3", user, null, project2);
+            Ticket ticket3 = new Ticket("defect3", "Defect3", user, user2, project2);
             ticketRepository.save(ticket3);
 
             // projectServiceImplementation.deleteById(project1.getId());
             TicketDto ticketDto = new TicketDto(0L, "defectChangedName", Status.REVIEW, "brbr", user2.getUsername(), null, LocalDate.now(), project2.getTitle());
             Ticket test = ticketServiceImplementation.dtoToEntity(ticketDto);
             ticketServiceImplementation.updateTicket(test, ticket3.getId());
+
+            Project project = new Project("test");
+            projectRepository.save(project);
         };
     }
 }

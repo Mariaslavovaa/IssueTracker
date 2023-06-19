@@ -77,7 +77,7 @@ export class DropListComponent {
 
   changeStatus(ticket: IssueTicket, status: Status, username: String) {
     ticket.status = status;
-    this.issueTicketService.changeStatus(ticket, username);
+    this.issueTicketService.changeStatus(ticket, username)
   }
 
   constructor(
@@ -96,6 +96,8 @@ export class DropListComponent {
 
   ngOnChanges() {
     this.allIssues.forEach((issue) => {
+      console.log(issue)
+      this.issueTicketService.changeTicket(issue)
       switch (issue.status) {
         case Status.todo:
           this.todo.push(issue);

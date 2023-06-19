@@ -20,6 +20,13 @@ export class ProjectsIssuesComponent {
     this.ProjectService.getProjects().subscribe({
       next: (projects) => {
         this.projects = projects;
+        this.projects.forEach(project => {
+          ProjectService.getIssuesByProject(project).subscribe(issues => {
+            if(issues){
+              project.allIssues = issues;
+            }
+          })
+        })
       },
       error: (err) => {
         
@@ -29,13 +36,20 @@ export class ProjectsIssuesComponent {
 
   ngOnInit() {
     this.ProjectService.getProjects().subscribe({
-      next: (projects) => {
-        this.projects = projects;
-      },
-      error: (err) => {
-        
-      }
-    });
+    next: (projects) => {
+      this.projects = projects;
+      this.projects.forEach(project => {
+        this.ProjectService.getIssuesByProject(project).subscribe(issues => {
+          if(issues){
+            project.allIssues = issues;
+          }
+        })
+      })
+    },
+    error: (err) => {
+      
+    }
+  });
     this.isFormOpenService.childEventListner().subscribe((info) => {
       this.isFormOpen = info;
     });
