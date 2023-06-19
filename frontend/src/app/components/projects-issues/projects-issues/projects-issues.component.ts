@@ -25,13 +25,17 @@ export class ProjectsIssuesComponent {
     this.ProjectService.getProjects(this.tokenStorage.getUsername()).subscribe({
       next: (projects) => {
         this.projects = projects;
+        this.projects.forEach(project => {
+          this.ProjectService.getIssuesByProject(project).subscribe(issues => {
+            if(issues){
+              project.allIssues = issues;
+            }
+          })
+        })
       },
       error: (err) => {
         console.log(err);
       },
-    });
-    this.isFormOpenService.childEventListner().subscribe((info) => {
-      this.isFormOpen = info;
     });
   }
 

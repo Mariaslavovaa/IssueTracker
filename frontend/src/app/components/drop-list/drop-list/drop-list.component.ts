@@ -102,6 +102,8 @@ export class DropListComponent {
       return;
     }
     this.allIssues.forEach((issue) => {
+      console.log(issue)
+      this.issueTicketService.changeTicket(issue)
       switch (issue.status) {
         case Status.todo:
           this.todo.push(issue);

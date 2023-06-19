@@ -6,24 +6,17 @@ import com.example.issue_tracker_backend.model.Project;
 import com.example.issue_tracker_backend.model.Ticket;
 import com.example.issue_tracker_backend.repository.ProjectRepository;
 import com.example.issue_tracker_backend.repository.TicketRepository;
-import jakarta.persistence.EntityExistsException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ProjectServiceImplementation implements ProjectService {
     private final ProjectRepository projectRepository;
     private final TicketRepository ticketRepository;
-
-    private final TicketService ticketService;
-
-    public ProjectServiceImplementation(final ProjectRepository projectRepository, TicketRepository ticketRepository, TicketService ticketService) {
-        this.projectRepository = projectRepository;
-        this.ticketRepository = ticketRepository;
-        this.ticketService = ticketService;
-    }
 
     @Override
     public List<Project> getAllProjects() {

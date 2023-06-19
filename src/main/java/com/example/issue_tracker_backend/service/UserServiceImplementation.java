@@ -7,7 +7,7 @@ import com.example.issue_tracker_backend.repository.UserRepository;
 
 import com.example.issue_tracker_backend.utils.EmailValidator;
 import jakarta.persistence.EntityExistsException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,15 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImplementation implements UserService, UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
-
-    @Autowired
-    public UserServiceImplementation(final UserRepository repository, final PasswordEncoder passwordEncoder) {
-        this.userRepository = repository;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     public void createUser(User user) {
         if (userRepository.existsById(user.getUsername())) {

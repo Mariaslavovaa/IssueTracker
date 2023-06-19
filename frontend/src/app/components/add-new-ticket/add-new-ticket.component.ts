@@ -37,13 +37,8 @@ export class AddNewTicketComponent {
   }
 
   saveTicket() {
-    this.ticket.creator = this.username;
-    this.issueTicketService.createTicket(this.ticket).subscribe({
-      next: () => {
-        console.log('Ticket deleted!')
-        window.location.reload();
-      },
-      error: (error) => { console.error("Error deleting ticket", error); }
-    });
+    this.ticket.creator = this.username
+    this.issueTicketService.createTicket(this.ticket).subscribe(response => console.log("success"))
+    window.location.reload()
   }
 }
