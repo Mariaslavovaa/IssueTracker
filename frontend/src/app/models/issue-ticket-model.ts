@@ -16,7 +16,7 @@ export class IssueTicket {
   creator: String; //User;
   assignedTo: String; //user
   dateOfCreation: Date;
-  project: String; //Project;
+  projectTitle: String; //Project;
 
   constructor(
     id: number,
@@ -26,7 +26,7 @@ export class IssueTicket {
     creator: string, //User
     assignedTo: string, //username
     dateOfCreation: Date,
-    project: string //Project
+    projectTitle: string //Project
   ) {
     this.id = id;
     this.title = title;
@@ -34,7 +34,7 @@ export class IssueTicket {
     this.status = status;
     this.creator = creator;
     this.dateOfCreation = dateOfCreation;
-    this.project = project;
+    this.projectTitle = projectTitle;
     this.assignedTo = assignedTo;
   }
 }

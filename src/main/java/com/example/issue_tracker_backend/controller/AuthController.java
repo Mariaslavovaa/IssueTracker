@@ -32,7 +32,11 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<User> signupSave(@RequestBody SignupRequest signupRequest) {
         User newUser = new User(signupRequest.getUsername(), signupRequest.getEmail(), signupRequest.getPassword());
-        userService.createUser(newUser);
+        try {
+            userService.createUser(newUser);
+        } catch (IllegalArgumentException ex) {
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
         return ResponseEntity.ok().body(newUser);
     }
 

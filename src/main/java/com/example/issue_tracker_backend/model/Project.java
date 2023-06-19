@@ -27,6 +27,7 @@ public class Project {
     )
     private Set<User> usersWithAccess = new HashSet<>();
 
+
     @OneToMany(mappedBy = "project")
     private Set<Ticket> tickets = new HashSet<>();
 

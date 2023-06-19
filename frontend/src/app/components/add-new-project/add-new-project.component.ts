@@ -9,7 +9,7 @@ import { TokenStorageService } from 'src/app/service/token-service.service';
   styleUrls: ['./add-new-project.component.css']
 })
 export class AddNewProjectComponent {
-  project: Project = new Project(-1, '', []);
+  project: Project = new Project('', []);
   private projectService: ProjectService;
 
   constructor(private tokenStorage: TokenStorageService, projectService: ProjectService){
@@ -19,11 +19,9 @@ export class AddNewProjectComponent {
   saveProject() {
     this.projectService.createProject(this.project).subscribe(response => {
       if(response){
-        alert("You have syccessfuly create project!")
-        this.project = response;
+        window.location.reload();
       }
     });
-    window.location.assign("/projects-issues")
   }
 
 }

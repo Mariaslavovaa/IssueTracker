@@ -29,8 +29,6 @@ export class EditWindowComponent {
   ticket: IssueTicket;
   private issueTicketService: IssueTicketService;
   private isFormOpenService: isFormOpenService;
-  allProjects: String[] = ['Project1', 'Project2', 'Project3'];
-  // selected: String = '';
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: IssueTicket,
@@ -43,15 +41,20 @@ export class EditWindowComponent {
     this.ticket = Object.values(data)[0];
   }
   saveTicket() {
-    this.issueTicketService.changeTicket(this.ticket);
-    console.log(this.ticket);
-    this.dialogRef.close();
+    this.issueTicketService.changeTicket(this.ticket).subscribe({
+      next: (updatedTicket) => { console.log('Ticket updated:', updatedTicket), window.location.reload() },
+      error: (error) => console.error('Error updating ticket:', error),
+    });
   }
 
   deleteTicket() {
-    this.issueTicketService.deleteTicket(this.ticket.id);
-    console.log(this.ticket);
-    this.dialogRef.close();
+    this.issueTicketService.deleteTicket(this.ticket.id).subscribe({
+      next: () => {
+        console.log('Ticket deleted!')
+        window.location.reload();
+      },
+      error: (error) => console.error('Error deleting ticket', error),
+    });
   }
 
   closeDialog() {

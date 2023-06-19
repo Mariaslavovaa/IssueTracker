@@ -29,13 +29,19 @@ export class LoginComponent implements OnInit {
 
   login() {
     const loginData = { username: this.form.username, password: this.form.password };
-    this.loginService.loginUser(loginData.username, loginData.password).subscribe(response => {
-      if (response) {
-        alert("Welcome " + response.username)
-        this.isLoggedIn = true;
-        this.tokenStorage.saveUser({ username: response.username, email: response.email })
-        this.tokenStorage.saveToken(response.token);
-        this.router.navigateByUrl("/all-issues")
+    this.loginService.loginUser(loginData.username, loginData.password).subscribe({
+      next: response => {
+        if (response) {
+          this.isLoggedIn = true;
+          this.tokenStorage.saveUser({ username: response.username, email: response.email })
+          this.tokenStorage.saveToken(response.token);
+          this.router.navigateByUrl("/all-issues")
+        }
+      },
+      error: err => {
+        if (err && err.error && err.error.message) {
+          this.errorMessage = err.error.message;
+        }
       }
     })
   }

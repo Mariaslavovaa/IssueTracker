@@ -1,5 +1,6 @@
 package com.example.issue_tracker_backend.service;
 
+import com.example.issue_tracker_backend.dtos.ProjectDto;
 import com.example.issue_tracker_backend.dtos.TicketDto;
 import com.example.issue_tracker_backend.model.Project;
 import com.example.issue_tracker_backend.model.Ticket;
@@ -11,7 +12,9 @@ import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +31,9 @@ public class TicketServiceImplementation implements TicketService {
         if (ticket.getAssignedTo() != null && userRepository.findByUsername(ticket.getAssignedTo().getUsername()) == null) {
             throw new IllegalArgumentException("Invalid username");
         }
+        Project project = projectRepository.findById(ticket.getProject().getTitle()).orElseThrow(IllegalArgumentException::new);
+        project.getTickets().add(ticket);
+        projectRepository.save(project);
         return repository.save(ticket);
     }
 
@@ -36,6 +42,7 @@ public class TicketServiceImplementation implements TicketService {
         Ticket found = repository.findById(id).orElseThrow(EntityExistsException::new);
         found.setStatus(ticket.getStatus());
         found.setCreator(ticket.getCreator());
+        found.setAssignedTo(ticket.getAssignedTo());
         found.setTitle(ticket.getTitle());
         found.setProject(ticket.getProject());
         found.setDateOfCreation(ticket.getDateOfCreation());

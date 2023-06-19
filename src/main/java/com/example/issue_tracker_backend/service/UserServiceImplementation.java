@@ -5,6 +5,7 @@ import com.example.issue_tracker_backend.config.UserDetailsImplementation;
 import com.example.issue_tracker_backend.model.User;
 import com.example.issue_tracker_backend.repository.UserRepository;
 
+import com.example.issue_tracker_backend.utils.EmailValidator;
 import jakarta.persistence.EntityExistsException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,8 +27,11 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
         if (userRepository.existsById(user.getUsername())) {
             throw new IllegalArgumentException("Username already in use!");
         }
-        if(this.findByEmail(user.getEmail()) != null){
+        if (this.findByEmail(user.getEmail()) != null) {
             throw new IllegalArgumentException("Email already in use");
+        }
+        if (!EmailValidator.validate(user.getEmail())) {
+            throw new IllegalArgumentException("Invalid email");
         }
 
         User newUser = new User();

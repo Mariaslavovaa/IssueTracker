@@ -77,7 +77,10 @@ export class DropListComponent {
 
   changeStatus(ticket: IssueTicket, status: Status, username: String) {
     ticket.status = status;
-    this.issueTicketService.changeStatus(ticket, username)
+    this.issueTicketService.changeStatus(ticket, username).subscribe({
+      next: (updatedTicket) => console.log('Ticket updated:', updatedTicket),
+      error: (error) => console.error('Error updating ticket:', error),
+    });;
   }
 
   constructor(
@@ -95,6 +98,9 @@ export class DropListComponent {
   }
 
   ngOnChanges() {
+    if (this.allIssues === undefined) {
+      return;
+    }
     this.allIssues.forEach((issue) => {
       console.log(issue)
       this.issueTicketService.changeTicket(issue)
