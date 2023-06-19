@@ -4,6 +4,7 @@ import { IssueTicket, Status } from 'src/app/models/issue-ticket-model';
 import { Project } from 'src/app/models/project-model';
 import { isFormOpenService } from 'src/app/service/is-form-open-service';
 import { ProjectService } from 'src/app/service/project-service';
+import { TokenStorageService } from 'src/app/service/token-service.service';
 
 @Component({
   selector: 'projects-issues',
@@ -16,26 +17,27 @@ export class ProjectsIssuesComponent {
 
   constructor(
     private ProjectService: ProjectService,
-    private isFormOpenService: isFormOpenService
-  ) { }
+    private isFormOpenService: isFormOpenService,
+    private tokenStorage: TokenStorageService
+  ) {}
 
   ngOnInit() {
-    this.ProjectService.getProjects().subscribe({
+    this.ProjectService.getProjects(this.tokenStorage.getUsername()).subscribe({
       next: (projects) => {
         this.projects = projects;
       },
       error: (err) => {
-        console.log(err)
-      }
+        console.log(err);
+      },
     });
     this.isFormOpenService.childEventListner().subscribe((info) => {
       this.isFormOpen = info;
     });
   }
 
-  deleteProject(project: Project){
+  deleteProject(project: Project) {
     this.ProjectService.deleteProject(project).subscribe(() => {
       window.location.reload();
-    })
+    });
   }
 }

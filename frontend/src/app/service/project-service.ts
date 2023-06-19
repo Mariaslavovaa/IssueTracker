@@ -10,8 +10,8 @@ import { environment } from 'src/environments/environment';
 export class ProjectService {
   constructor(private http: HttpClient) {}
 
-  getProjects() {
-    const url = `${environment.restApi}/projects/all`;
+  getProjects(username: String | null) {
+    const url = `${environment.restApi}/projects/all/${username}`;
     return this.http.get<Project[]>(url);
   }
 
@@ -20,9 +20,7 @@ export class ProjectService {
     return this.http.post<Project>(url, project);
   }
 
-  deleteProject(project: Project) : Observable<any>{
+  deleteProject(project: Project): Observable<any> {
     return this.http.delete(`${environment.restApi}/projects/${project.title}`);
   }
-
-
 }
