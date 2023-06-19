@@ -28,7 +28,7 @@ public class Project {
     private Set<User> usersWithAccess = new HashSet<>();
 
 
-    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "project")
     private Set<Ticket> tickets = new HashSet<>();
 
     public Project(String title) {
