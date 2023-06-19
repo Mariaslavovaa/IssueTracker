@@ -11,8 +11,8 @@ import { IssueTicket } from '../models/issue-ticket-model';
 export class ProjectService {
   constructor(private http: HttpClient) {}
 
-  getProjects() {
-    const url = `${environment.restApi}/private/api/projects/all`;
+  getProjects(username: String | null) {
+    const url = `${environment.restApi}/projects/all/${username}`;
     return this.http.get<Project[]>(url);
   }
 
