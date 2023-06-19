@@ -59,7 +59,7 @@ public class DataGenerator {
             ticketRepository.save(ticket3);
 
             // projectServiceImplementation.deleteById(project1.getId());
-            TicketDto ticketDto = new TicketDto(0L, "defectChangedName", Status.REVIEW, "brbr", user2.getUsername(), null, LocalDate.now(), project2.getTitle());
+            TicketDto ticketDto = new TicketDto(0L, "defectChangedName", Status.REVIEW, "brbr", user2.getUsername(), user.getUsername(), LocalDate.now(), project2.getTitle());
             Ticket test = ticketServiceImplementation.dtoToEntity(ticketDto);
             ticketServiceImplementation.updateTicket(test, ticket3.getId());
 
