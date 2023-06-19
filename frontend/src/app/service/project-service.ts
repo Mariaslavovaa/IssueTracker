@@ -16,6 +16,11 @@ export class ProjectService {
     return this.http.get<Project[]>(url);
   }
 
+  getProjectsByUsername(username: string) {
+    const url = `${environment.restApi}/private/api/projects/all/${username}`;
+    return this.http.get<Project[]>(url);
+  }
+
   createProject(project: Project) {
     const url = `${environment.restApi}/private/api/projects`;
     return this.http.post<Project>(url, project);

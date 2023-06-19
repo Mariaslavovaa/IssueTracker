@@ -49,4 +49,12 @@ public class ProjectServiceImplementation implements ProjectService {
         return projectRepository.save(project);
     }
 
+    @Override
+    public List<Project> getAllByUsername(String username) {
+            return projectRepository.getProjectsByUsername(username).stream()
+                    .map(id -> projectRepository.findById(id).orElseThrow())
+                    .toList();
+    }
+
+
 }

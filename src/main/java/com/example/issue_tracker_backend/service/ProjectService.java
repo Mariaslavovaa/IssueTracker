@@ -18,4 +18,6 @@ public interface ProjectService {
 
     Project createProject(Project project);
 
+    List<Project> getAllByUsername(String username);
+
 }

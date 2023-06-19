@@ -22,7 +22,7 @@ export class ProjectsIssuesComponent {
   ) {}
 
   ngOnInit() {
-    this.ProjectService.getProjects().subscribe({
+    this.ProjectService.getProjectsByUsername(this.tokenStorage.getUsername()).subscribe({
       next: (projects) => {
         this.projects = projects;
         this.projects.forEach(project => {

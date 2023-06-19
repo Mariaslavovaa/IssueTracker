@@ -43,6 +43,11 @@ public class ProjectController {
         return new ResponseEntity<>(projectService.getAllProjects(), HttpStatus.OK);
     }
 
+    @GetMapping("/all/{username}")
+    public ResponseEntity<List<Project>> getProjectsByUser(@PathVariable("username") String username){
+        return new ResponseEntity<>(projectService.getAllByUsername(username), HttpStatus.OK);
+    }
+
     @DeleteMapping("/{title}")
     public void deleteProject(@PathVariable("title") String title){
         projectService.deleteByTitle(title);
