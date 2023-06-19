@@ -3,11 +3,10 @@ package com.example.issue_tracker_backend.service;
 
 import com.example.issue_tracker_backend.config.UserDetailsImplementation;
 import com.example.issue_tracker_backend.model.User;
-import com.example.issue_tracker_backend.repository.TicketRepository;
 import com.example.issue_tracker_backend.repository.UserRepository;
 
+import com.example.issue_tracker_backend.utils.EmailValidator;
 import jakarta.persistence.EntityExistsException;
-import org.hibernate.tool.schema.internal.exec.ScriptTargetOutputToFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,7 +23,7 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
     private final UserRepository userRepository;
 
     @Autowired
-    public UserServiceImplementation(final UserRepository repository, final PasswordEncoder passwordEncoder, final TicketRepository ticketRepository) {
+    public UserServiceImplementation(final UserRepository repository, final PasswordEncoder passwordEncoder) {
         this.userRepository = repository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -33,8 +32,11 @@ public class UserServiceImplementation implements UserService, UserDetailsServic
         if (userRepository.existsById(user.getUsername())) {
             throw new IllegalArgumentException("Username already in use!");
         }
-        if(this.findByEmail(user.getEmail()) != null){
+        if (this.findByEmail(user.getEmail()) != null) {
             throw new IllegalArgumentException("Email already in use");
+        }
+        if (!EmailValidator.validate(user.getEmail())) {
+            throw new IllegalArgumentException("Invalid email");
         }
 
         User newUser = new User();
