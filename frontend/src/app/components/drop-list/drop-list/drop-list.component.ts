@@ -42,29 +42,32 @@ export class DropListComponent {
         event.previousIndex,
         event.currentIndex
       );
-      switch (event.container.id) {
-        case 'cdk-drop-list-0':
+      // take the last char of the drop list name.
+      const lastCh = event.container.id.slice(-1);
+      const statusId = parseInt(lastCh) % 4;
+      switch (statusId) {
+        case 0:
           this.changeStatus(
             event.container.data[0],
             Status.todo,
             this.username
           );
           break;
-        case 'cdk-drop-list-1':
+        case 1:
           this.changeStatus(
             event.container.data[0],
             Status.inprogress,
             this.username
           );
           break;
-        case 'cdk-drop-list-2':
+        case 2:
           this.changeStatus(
             event.container.data[0],
             Status.review,
             this.username
           );
           break;
-        case 'cdk-drop-list-3':
+        case 3:
           this.changeStatus(
             event.container.data[0],
             Status.done,
