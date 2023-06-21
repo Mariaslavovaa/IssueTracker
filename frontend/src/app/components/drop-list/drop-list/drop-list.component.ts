@@ -42,9 +42,9 @@ export class DropListComponent {
         event.previousIndex,
         event.currentIndex
       );
-      // take the last char of the drop list name.
-      const lastCh = event.container.id.slice(-1);
-      const statusId = parseInt(lastCh) % 4;
+      // take the number of the drop list name.
+      const id = event.container.id.substring(event.container.id.lastIndexOf("-")+1);
+      const statusId = parseInt(id) % 4;
       switch (statusId) {
         case 0:
           this.changeStatus(
@@ -80,6 +80,7 @@ export class DropListComponent {
 
   changeStatus(ticket: IssueTicket, status: Status, username: String) {
     ticket.status = status;
+    console.log(ticket, status, username);
     this.issueTicketService.changeStatus(ticket, username).subscribe({
       next: (updatedTicket) => console.log('Ticket updated:', updatedTicket),
       error: (error) => console.error('Error updating ticket:', error),
@@ -105,8 +106,8 @@ export class DropListComponent {
       return;
     }
     this.allIssues.forEach((issue) => {
-      console.log(issue)
-      this.issueTicketService.changeTicket(issue)
+      // console.log(issue)
+      // this.issueTicketService.changeTicket(issue)
       switch (issue.status) {
         case Status.todo:
           this.todo.push(issue);
