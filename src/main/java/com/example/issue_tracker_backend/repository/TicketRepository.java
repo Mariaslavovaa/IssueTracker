@@ -1,6 +1,5 @@
 package com.example.issue_tracker_backend.repository;
 
-import com.example.issue_tracker_backend.model.Project;
 import com.example.issue_tracker_backend.model.Ticket;
 import com.example.issue_tracker_backend.model.User;
 import org.springframework.data.repository.CrudRepository;

@@ -17,5 +17,5 @@ public class TicketDto {
     private String creator;
     private String assignedTo;
     private LocalDate dateOfCreation;
-    private String project;
+    private String projectTitle;
 }

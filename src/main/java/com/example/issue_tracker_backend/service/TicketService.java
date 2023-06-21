@@ -2,7 +2,6 @@ package com.example.issue_tracker_backend.service;
 
 import com.example.issue_tracker_backend.dtos.TicketDto;
 import com.example.issue_tracker_backend.model.Ticket;
-import com.example.issue_tracker_backend.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

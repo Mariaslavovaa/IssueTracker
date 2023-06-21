@@ -25,11 +25,19 @@ public class TicketServiceImplementation implements TicketService {
 
     @Override
     public Ticket createTicket(Ticket ticket) {
-        if (ticket == null) {
-            throw new IllegalArgumentException("Ticket cannot be null!");
-        }
-        if (ticket.getAssignedTo() != null && userRepository.findByUsername(ticket.getAssignedTo().getUsername()) == null) {
-            throw new IllegalArgumentException("Invalid username");
+        System.out.println("DTO FROM BE");
+        System.out.println("PROJECT: " + ticket.getProject());
+        System.out.println("DESCRIPTION: " + ticket.getDescription());
+        System.out.println("STATUS: " + ticket.getStatus());
+        System.out.println("DATE: " + ticket.getDateOfCreation());
+        System.out.println("CREATOR: " + ticket.getCreator());
+        System.out.println("ASSIGNED TO: " + ticket.getAssignedTo());
+        System.out.println("TITLE: " + ticket.getTitle());
+        System.out.println("ID: " + ticket.getId());
+
+        if (ticket.getAssignedTo() != null) {
+            if (userRepository.findByUsername(ticket.getAssignedTo().getUsername()) == null)
+                throw new IllegalArgumentException("Invalid username");
         }
         Project project = projectRepository.findById(ticket.getProject().getTitle()).orElseThrow(IllegalArgumentException::new);
         project.getTickets().add(ticket);
@@ -51,20 +59,20 @@ public class TicketServiceImplementation implements TicketService {
     }
 
     public TicketDto entityToDto(Ticket ticket) {
+        String assignedTo = ticket.getAssignedTo() == null ? "" : ticket.getAssignedTo().getUsername();
         return new TicketDto(ticket.getId(), ticket.getTitle(), ticket.getStatus(),
-                ticket.getDescription(), ticket.getCreator().getUsername(), ticket.getAssignedTo().getUsername(), ticket.getDateOfCreation(), ticket.getProject().getTitle());
+                ticket.getDescription(), ticket.getCreator().getUsername(), assignedTo, ticket.getDateOfCreation(), ticket.getProject().getTitle());
     }
 
     public Ticket dtoToEntity(TicketDto ticketDto) {
         User creator = userRepository.findById(ticketDto.getCreator()).orElseThrow(EntityExistsException::new);
         User assignedTo;
-        if (ticketDto.getAssignedTo() == null) {
+        if (ticketDto.getAssignedTo().equals("")) {
             assignedTo = null;
         } else {
             assignedTo = userRepository.findById(ticketDto.getAssignedTo()).orElseThrow(EntityExistsException::new);
         }
-        Project project = projectRepository.findById(ticketDto.getProject()).orElseThrow(EntityExistsException::new);
-
+        Project project = projectRepository.findById(ticketDto.getProjectTitle()).orElseThrow(EntityExistsException::new);
         return new Ticket(ticketDto.getTitle(), ticketDto.getDescription(), creator, ticketDto.getStatus(), assignedTo, project);
     }
 

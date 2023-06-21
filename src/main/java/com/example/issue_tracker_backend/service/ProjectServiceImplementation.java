@@ -1,12 +1,12 @@
 package com.example.issue_tracker_backend.service;
 
 import com.example.issue_tracker_backend.dtos.ProjectDto;
-import com.example.issue_tracker_backend.dtos.TicketDto;
 import com.example.issue_tracker_backend.model.Project;
-import com.example.issue_tracker_backend.model.Ticket;
 import com.example.issue_tracker_backend.repository.ProjectRepository;
 import com.example.issue_tracker_backend.repository.TicketRepository;
+import com.example.issue_tracker_backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,6 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProjectServiceImplementation implements ProjectService {
     private final ProjectRepository projectRepository;
+    private final UserRepository userRepository;
     private final TicketRepository ticketRepository;
 
     @Override
@@ -46,6 +47,11 @@ public class ProjectServiceImplementation implements ProjectService {
         if (project == null) {
             throw new IllegalArgumentException("Project cannot be null!");
         }
+        if(projectRepository.existsById(project.getTitle())){
+            throw new IllegalArgumentException("Project name already in use!");
+        }
+        String currentUserName = SecurityContextHolder.getContext().getAuthentication().getName();
+        project.giveAccessToUser(userRepository.findByUsername(currentUserName));
         return projectRepository.save(project);
     }
 

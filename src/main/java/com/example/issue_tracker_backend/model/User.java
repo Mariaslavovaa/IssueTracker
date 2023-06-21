@@ -6,10 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
@@ -36,10 +33,14 @@ public class User {
     @OneToMany(mappedBy = "creator")
     private Set<Ticket> tickets = new HashSet<>();
 
-    public User(String username, String email, String password){
+    public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
 
+    }
+
+    public void addProject(Project project) {
+        projects.add(project);
     }
 }
