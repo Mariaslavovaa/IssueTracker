@@ -64,11 +64,12 @@ public class Security {
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authenticationProvider(authProvider).authorizeHttpRequests().anyRequest().permitAll();
-
-                // TODO: reenable later
-                // .requestMatchers("/private/api/tickets/**").authenticated()
-                // .requestMatchers("/private/api/auth/**").permitAll().and();
+                .authenticationProvider(authProvider).authorizeHttpRequests()
+                .requestMatchers("/private/api/tickets/**").authenticated()
+                .requestMatchers("/private/api/projects/**").authenticated()
+                .requestMatchers("/users/all").authenticated()
+                .requestMatchers("/private/api/auth/**").permitAll()
+                .anyRequest().authenticated();
         http.addFilterBefore(new OncePerRequestFilter() {
             @Override
             protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
