@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { Observable } from 'rxjs/internal/Observable';
 import { IssueTicket, Status } from 'src/app/models/issue-ticket-model';
 import { IssueTicketService } from 'src/app/service/issues-service';
 import { TokenStorageService } from 'src/app/service/token-service.service';
@@ -37,11 +35,20 @@ export class AddNewTicketComponent {
   }
 
   saveTicket() {
-    this.ticket.creator = this.username
-    this.issueTicketService.createTicket(this.ticket).subscribe(
-      response => {
-        console.log("success");
-        window.location.reload();
-      })
+    this.ticket.creator = this.username;
+    this.issueTicketService.createTicket(this.ticket).subscribe({});
+    window.location.reload();
+  }
+
+  DisplayError() {
+    return 'You must enter a value';
+  }
+
+  IsValidForm() {
+    return (
+      this.ticket.title.length > 0 &&
+      this.ticket.assignedTo.length > 0 &&
+      this.ticket.projectTitle.length > 0
+    );
   }
 }

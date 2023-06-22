@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { IssueTicket } from 'src/app/models/issue-ticket-model';
 import { User } from 'src/app/models/user-model';
 import { isFormOpenService } from 'src/app/service/is-form-open-service';
 import { IssueTicketService } from 'src/app/service/issues-service';
@@ -27,7 +26,6 @@ export class AssigneeIssuesComponent {
             .getAllTicketsCurrUser(user.username)
             .subscribe((response) => {
               if (response) {
-                console.log(response);
                 user.allIssues = response;
               }
             });

@@ -13,20 +13,20 @@ export class IssueTicket {
   title: String;
   description: String;
   status: Status;
-  creator: String; //User;
-  assignedTo: String; //user
+  creator: String;
+  assignedTo: String;
   dateOfCreation: Date;
-  projectTitle: String; //Project;
+  projectTitle: String;
 
   constructor(
     id: number,
     title: string,
     description: string,
     status: Status,
-    creator: string, //User
-    assignedTo: string, //username
+    creator: string,
+    assignedTo: string,
     dateOfCreation: Date,
-    projectTitle: string //Project
+    projectTitle: string
   ) {
     this.id = id;
     this.title = title;

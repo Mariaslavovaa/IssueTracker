@@ -17,7 +17,7 @@ export class ProjectsIssuesComponent {
   projects: Project[] = [];
   isFormOpen: boolean = false;
 
-  @Output() isFormOpenEmitter = new EventEmitter<boolean>(false); //: boolean = false;
+  @Output() isFormOpenEmitter = new EventEmitter<boolean>(false);
 
   constructor(
     private ProjectService: ProjectService,

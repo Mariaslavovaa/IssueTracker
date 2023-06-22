@@ -11,7 +11,7 @@
       value="{{ ticket.title }}"
       ngModel
     />
-    <mat-hint *ngIf="ticket.title.length === 0">
+    <mat-hint class="error-hint" *ngIf="ticket.title.length === 0">
       {{ DisplayError() }}
     </mat-hint>
     <mat-hint align="end">{{ inputTitle.value.length }}/50</mat-hint>
@@ -37,10 +37,13 @@
       #inputAssigned
       maxlength="30"
       name="ticketAssigned"
-      placeholder="Name"
+      placeholder="Username"
       [(ngModel)]="ticket.assignedTo"
       value="{{ ticket.assignedTo }}"
     />
+    <mat-hint class="error-hint" *ngIf="ticket.assignedTo.length === 0">
+      {{ DisplayError() }}
+    </mat-hint>
     <mat-hint align="end">{{ inputAssigned.value.length }}/30</mat-hint>
   </mat-form-field>
 
@@ -55,6 +58,9 @@
       [(ngModel)]="ticket.projectTitle"
       value="{{ ticket.projectTitle }}"
     />
+    <mat-hint class="error-hint" *ngIf="ticket.projectTitle.length === 0">
+      {{ DisplayError() }}
+    </mat-hint>
     <mat-hint align="end">{{ inputProject.value.length }}/30</mat-hint>
   </mat-form-field>
 

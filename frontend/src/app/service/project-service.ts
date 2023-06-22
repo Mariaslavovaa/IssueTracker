@@ -53,9 +53,6 @@ export class ProjectService {
           project
         );
       },
-      error: (err) => {
-        console.log(err);
-      },
     });
   }
 }

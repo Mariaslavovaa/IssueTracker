@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule, matSelectAnimations } from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { Inject } from '@angular/core';
@@ -44,27 +44,19 @@ export class EditWindowComponent {
     this.ticket = Object.values(data)[0];
   }
   saveTicket() {
-    this.issueTicketService.changeTicket(this.ticket).subscribe({
-      next: (updatedTicket) => {
-        console.log('Ticket updated:', updatedTicket), window.location.reload();
-      },
-      error: (error) => console.error('Error updating ticket:', error),
-    });
+    this.issueTicketService.changeTicket(this.ticket).subscribe({});
+    window.location.reload();
   }
 
   deleteTicket() {
-    this.issueTicketService.deleteTicket(this.ticket.id).subscribe({
-      next: () => {
-        console.log('Ticket deleted!');
-        window.location.reload();
-      },
-      error: (error) => console.error('Error deleting ticket', error),
-    });
+    this.issueTicketService.deleteTicket(this.ticket.id).subscribe({});
+    window.location.reload();
   }
 
   closeDialog() {
     this.isFormOpenService.openForm(false);
     this.dialogRef.close();
+    window.location.reload();
   }
 
   DisplayError() {
@@ -74,7 +66,6 @@ export class EditWindowComponent {
   IsValidForm() {
     return (
       this.ticket.title.length > 0 &&
-      this.ticket.description.length > 0 &&
       this.ticket.assignedTo.length > 0 &&
       this.ticket.projectTitle.length > 0
     );

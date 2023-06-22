@@ -62,3 +62,6 @@ textarea {
 p {
   margin-left: 5%;
 }
+.error-hint {
+  color: red;
+}

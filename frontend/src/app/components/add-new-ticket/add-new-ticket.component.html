@@ -1,6 +1,6 @@
 <form #itemForm="ngForm" class="example-form">
   <p>New Ticket</p>
-  
+
   <mat-form-field class="form-field" id="first">
     <input
       matInput
@@ -11,6 +11,9 @@
       [(ngModel)]="ticket.title"
       ngModel
     />
+    <mat-hint class="error-hint" *ngIf="ticket.title.length === 0">
+      {{ DisplayError() }}
+    </mat-hint>
     <mat-hint align="end">{{ inputTitle.value.length }}/50</mat-hint>
   </mat-form-field>
 
@@ -36,6 +39,9 @@
       placeholder="Name"
       [(ngModel)]="ticket.assignedTo"
     />
+    <mat-hint class="error-hint" *ngIf="ticket.assignedTo.length === 0">
+      {{ DisplayError() }}
+    </mat-hint>
     <mat-hint align="end">{{ inputAssigned.value.length }}/30</mat-hint>
   </mat-form-field>
 
@@ -49,16 +55,22 @@
       placeholder="Project name"
       [(ngModel)]="ticket.projectTitle"
     />
+    <mat-hint class="error-hint" *ngIf="ticket.projectTitle.length === 0">
+      {{ DisplayError() }}
+    </mat-hint>
     <mat-hint align="end">{{ inputProject.value.length }}/30</mat-hint>
   </mat-form-field>
 
   <label>Creator of ticket: {{ username }}</label>
 
   <label>Date of creation: {{ date.toLocaleDateString("en-GB") }}</label>
-  <button id="btnSave" (click)="saveTicket()" matDialogClose>
+  <button
+    id="btnSave"
+    [disabled]="!IsValidForm()"
+    (click)="saveTicket()"
+    matDialogClose
+  >
     Save Ticket
   </button>
   <button id="btnCancel" matDialogClose>Cancel</button>
-
-  <!--(click)="saveTicket()" -->
 </form>

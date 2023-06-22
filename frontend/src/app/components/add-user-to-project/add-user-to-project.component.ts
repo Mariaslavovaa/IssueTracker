@@ -18,5 +18,9 @@ export class AddUserToProjectComponent {
 
   saveAccess() {
     this.projectService.addAccess(this.username, this.project);
+    // .subscribe({
+    //   next: (updatedTicket) => console.log('Ticket updated:', updatedTicket),
+    //   error: (error) => console.error('Error updating ticket:', error),
+    // });
   }
 }
