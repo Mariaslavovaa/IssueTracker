@@ -12,4 +12,7 @@ import java.util.List;
 public interface ProjectRepository extends CrudRepository<Project, String> {
     @Query(value = "select project_id from accessed_project where user_id = :username", nativeQuery = true)
     List<String> getProjectsByUsername(@Param("username") String username);
+
+    @Query(value = "select user_id from accessed_project where project_id = :title", nativeQuery = true)
+    List<String> getUsersWithAccessToProject(@Param("title") String title);
 }

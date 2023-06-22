@@ -17,12 +17,11 @@ export class ProjectsIssuesComponent {
   projects: Project[] = [];
   isFormOpen: boolean = false;
 
-  @Output() isFormOpenEmitter = new EventEmitter<boolean>(false);
-
   constructor(
     private ProjectService: ProjectService,
     private tokenStorage: TokenStorageService,
-    private dialogRef: MatDialog
+    private dialogRef: MatDialog,
+    private isFormOpenService: isFormOpenService
   ) {}
 
   ngOnInit() {
@@ -45,6 +44,9 @@ export class ProjectsIssuesComponent {
         console.log(err);
       },
     });
+    this.isFormOpenService.childEventListner().subscribe((info) => {
+      this.isFormOpen = info;
+    });
   }
 
   deleteProject(project: Project) {
@@ -53,8 +55,17 @@ export class ProjectsIssuesComponent {
     });
   }
 
-  addUser() {
-    this.isFormOpenEmitter.emit(true);
-    this.dialogRef.open(AddUserToProjectComponent);
+  addUser(project: Project) {
+    this.isFormOpenService.openForm(true);
+    // this.isFormOpenEmitter.emit(true);
+    var popup = this.dialogRef.open(AddUserToProjectComponent);
+    popup.componentInstance.projectTitle = project.title;
+    // addUser(title: string){
+    //   //TODO @DARI to integrate with the modal
+    //   // this.ProjectService.allowAccess(username, title).subscribe(response => {
+    //   //   if(response){
+    //   //     console.log("success")
+    //   //   }
+    //   // })
   }
 }

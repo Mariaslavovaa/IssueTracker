@@ -2,6 +2,7 @@ package com.example.issue_tracker_backend.service;
 
 import com.example.issue_tracker_backend.dtos.ProjectDto;
 import com.example.issue_tracker_backend.model.Project;
+import com.example.issue_tracker_backend.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,4 +21,7 @@ public interface ProjectService {
 
     List<Project> getAllByUsername(String username);
 
+    ProjectDto allowAccess(String username, String title);
+
+    List<String> usersWithAccess(String title);
 }

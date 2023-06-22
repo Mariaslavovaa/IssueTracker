@@ -1,9 +1,10 @@
-<!-- <nav-bar></nav-bar> -->
 <div *ngIf="!isFormOpen">
   <nav-bar></nav-bar>
   <div *ngFor="let project of projects">
     <p>
-      <button mat-raised-button (click)="this.addUser()">Add User</button>
+      <button mat-raised-button (click)="this.addUser(project)">
+        Add User
+      </button>
       Project name: {{ project.title }}
       <button mat-icon-button (click)="this.deleteProject(project)">
         <mat-icon class="deleteButton">delete</mat-icon>

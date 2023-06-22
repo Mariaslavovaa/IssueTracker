@@ -2,6 +2,7 @@ package com.example.issue_tracker_backend.service;
 
 import com.example.issue_tracker_backend.dtos.ProjectDto;
 import com.example.issue_tracker_backend.model.Project;
+import com.example.issue_tracker_backend.model.User;
 import com.example.issue_tracker_backend.repository.ProjectRepository;
 import com.example.issue_tracker_backend.repository.TicketRepository;
 import com.example.issue_tracker_backend.repository.UserRepository;
@@ -62,5 +63,19 @@ public class ProjectServiceImplementation implements ProjectService {
                     .toList();
     }
 
+    @Override
+    public ProjectDto allowAccess(String username, String title){
+        User found = userRepository.findByUsername(username);
+        Project foundProject = projectRepository.findById(title).orElseThrow();
 
+        foundProject.getUsersWithAccess().add(found);
+        projectRepository.save(foundProject);
+
+        return this.entityToDto(foundProject);
+    }
+
+    @Override
+    public List<String> usersWithAccess(String title) {
+        return projectRepository.getUsersWithAccessToProject(title);
+    }
 }

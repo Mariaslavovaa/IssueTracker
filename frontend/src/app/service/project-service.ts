@@ -42,17 +42,10 @@ export class ProjectService {
     );
   }
 
-  addAccess(username: String, project: Project) {
-    var user: User;
-    this.userService.getUserByUsername(username).subscribe({
-      next: (userResponse) => {
-        user = userResponse;
-        project.usersWithAccess.push(user);
-        return this.http.put<Project>(
-          `${environment.restApi}/private/api/projects/${project.title}`,
-          project
-        );
-      },
-    });
+  allowAccess(username: string, title: string): Observable<Project> {
+    return this.http.post<Project>(
+      `${environment.restApi}/private/api/projects/${title}/users/${username}`,
+      { username: username }
+    );
   }
 }

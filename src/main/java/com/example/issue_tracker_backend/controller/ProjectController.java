@@ -52,4 +52,14 @@ public class ProjectController {
     public void deleteProject(@PathVariable("title") String title){
         projectService.deleteByTitle(title);
     }
+
+    @PostMapping("/{title}/users")
+    public ResponseEntity<ProjectDto> allowAccess(@PathVariable String title, @RequestParam String username){
+        return ResponseEntity.ok().body(this.projectService.allowAccess(username, title));
+    }
+
+    @GetMapping("{title}/users")
+    public  ResponseEntity<List<String>> usersWithAccess(@PathVariable String title){
+        return ResponseEntity.ok().body(projectService.usersWithAccess(title));
+    }
 }
