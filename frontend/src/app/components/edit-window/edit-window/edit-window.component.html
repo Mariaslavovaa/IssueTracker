@@ -1,4 +1,4 @@
-<form #itemForm="ngForm" class="example-form">
+<form class="example-form">
   <p>Edit Ticket</p>
   <mat-form-field class="form-field" id="first">
     <input
@@ -74,7 +74,7 @@
     id="btnSave"
     [disabled]="!IsValidForm()"
     (click)="saveTicket()"
-    (click)="closeDialog()"
+    matDialogClose
   >
     Save Changes
   </button>

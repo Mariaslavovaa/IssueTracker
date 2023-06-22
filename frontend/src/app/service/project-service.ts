@@ -4,16 +4,12 @@ import { Observable } from 'rxjs';
 import { Project } from '../models/project-model';
 import { environment } from 'src/environments/environment';
 import { IssueTicket } from '../models/issue-ticket-model';
-import { UserService } from './user-service';
-import { User } from '../models/user-model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProjectService {
-  constructor(private http: HttpClient, private userService: UserService) {
-    this.userService = userService;
-  }
+  constructor(private http: HttpClient) {}
 
   getProjects() {
     const url = `${environment.restApi}/private/api/projects/all`;

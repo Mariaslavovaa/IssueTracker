@@ -53,8 +53,8 @@ public class ProjectController {
         projectService.deleteByTitle(title);
     }
 
-    @PostMapping("/{title}/users")
-    public ResponseEntity<ProjectDto> allowAccess(@PathVariable String title, @RequestParam String username){
+    @PostMapping("/{title}/users/{username}")
+    public ResponseEntity<ProjectDto> allowAccess(@PathVariable String title, @PathVariable String username){
         return ResponseEntity.ok().body(this.projectService.allowAccess(username, title));
     }
 

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Project } from 'src/app/models/project-model';
+import { isFormOpenService } from 'src/app/service/is-form-open-service';
 import { ProjectService } from 'src/app/service/project-service';
 
 @Component({
@@ -8,19 +9,36 @@ import { ProjectService } from 'src/app/service/project-service';
   styleUrls: ['./add-user-to-project.component.css'],
 })
 export class AddUserToProjectComponent {
-  @Input() project: Project;
-  username: String = '';
+  projectTitle: string;
+  username: string = '';
   private projectService: ProjectService;
+  private isFormOpenService: isFormOpenService;
 
-  constructor(projectService: ProjectService) {
+  constructor(
+    projectService: ProjectService,
+    isFormOpenService: isFormOpenService
+  ) {
     this.projectService = projectService;
+    this.isFormOpenService = isFormOpenService;
   }
 
   saveAccess() {
-    this.projectService.addAccess(this.username, this.project);
-    // .subscribe({
-    //   next: (updatedTicket) => console.log('Ticket updated:', updatedTicket),
-    //   error: (error) => console.error('Error updating ticket:', error),
-    // });
+    this.projectService
+      .allowAccess(this.username, this.projectTitle)
+      .subscribe({
+        next: (project) => {
+          console.log(project);
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+    this.isFormOpenService.openForm(false);
+    window.location.reload();
+  }
+
+  closeDialog() {
+    this.isFormOpenService.openForm(false);
+    window.location.reload();
   }
 }

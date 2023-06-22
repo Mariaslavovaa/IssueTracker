@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { TokenStorageService } from 'src/app/service/token-service.service';
 import { AddNewTicketComponent } from '../../add-new-ticket/add-new-ticket.component';
 import { AddNewProjectComponent } from '../../add-new-project/add-new-project.component';
+import { isFormOpenService } from 'src/app/service/is-form-open-service';
 
 @Component({
   selector: 'nav-bar',
@@ -11,21 +12,19 @@ import { AddNewProjectComponent } from '../../add-new-project/add-new-project.co
   styleUrls: ['./nav-bar.component.css'],
 })
 export class NavBarComponent {
-  @Output() isFormOpen = new EventEmitter<boolean>(false); //: boolean = false;
-
   constructor(
     private readonly tokenService: TokenStorageService,
     private readonly router: Router,
-    private dialogRef: MatDialog
+    private dialogRef: MatDialog,
+    private isFormOpenService: isFormOpenService
   ) {}
 
   addNewTicket() {
-    this.isFormOpen.emit(true);
+    this.isFormOpenService.openForm(true);
     this.dialogRef.open(AddNewTicketComponent);
   }
 
   addNewProject() {
-    this.isFormOpen.emit(true);
     this.dialogRef.open(AddNewProjectComponent);
   }
 

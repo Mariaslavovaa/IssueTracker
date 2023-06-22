@@ -15,16 +15,16 @@ export class IssueTicketService {
   }
 
   changeTicket(ticket: IssueTicket) {
-    return this.http.put<IssueTicket>(`${environment.restApi}/private/api/tickets/${ticket.id}`, ticket)
-  }
-
-  changeStatus(ticket: IssueTicket, username: String) {
-    return this.http
-      .put<IssueTicket>(`${environment.restApi}/private/api/tickets/${ticket.id}`, ticket)
+    return this.http.put<IssueTicket>(
+      `${environment.restApi}/private/api/tickets/${ticket.id}`,
+      ticket
+    );
   }
 
   deleteTicket(ticketId: number) {
-    return this.http.delete<IssueTicket>(`${environment.restApi}/private/api/tickets/${ticketId}`)
+    return this.http.delete<IssueTicket>(
+      `${environment.restApi}/private/api/tickets/${ticketId}`
+    );
   }
 
   createTicket(issueTicket: IssueTicket) {

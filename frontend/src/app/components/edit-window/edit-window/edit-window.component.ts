@@ -36,8 +36,7 @@ export class EditWindowComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: IssueTicket,
     issueTicketService: IssueTicketService,
-    isFormOpenService: isFormOpenService,
-    private dialogRef: MatDialogRef<EditWindowComponent>
+    isFormOpenService: isFormOpenService
   ) {
     this.issueTicketService = issueTicketService;
     this.isFormOpenService = isFormOpenService;
@@ -55,7 +54,6 @@ export class EditWindowComponent {
 
   closeDialog() {
     this.isFormOpenService.openForm(false);
-    this.dialogRef.close();
     window.location.reload();
   }
 

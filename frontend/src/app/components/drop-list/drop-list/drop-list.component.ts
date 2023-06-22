@@ -24,78 +24,45 @@ export class DropListComponent {
   inprogress: IssueTicket[] = [];
   review: IssueTicket[] = [];
   done: IssueTicket[] = [];
-  private issueTicketService: IssueTicketService;
-  private isFormOpenService: isFormOpenService;
-  private username: String;
-
-  drop(event: CdkDragDrop<IssueTicket[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    } else {
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-      var splitId = event.container.id.split('-');
-      var idIdx = splitId.length - 1;
-      var id = parseInt(splitId[idIdx]);
-      id = id % 4;
-      switch (id) {
-        case 0:
-          this.changeStatus(
-            event.container.data[0],
-            Status.todo,
-            this.username
-          );
-          break;
-        case 1:
-          this.changeStatus(
-            event.container.data[0],
-            Status.inprogress,
-            this.username
-          );
-          break;
-        case 2:
-          this.changeStatus(
-            event.container.data[0],
-            Status.review,
-            this.username
-          );
-          break;
-        case 3:
-          this.changeStatus(
-            event.container.data[0],
-            Status.done,
-            this.username
-          );
-          break;
-      }
-    }
-  }
-
-  changeStatus(ticket: IssueTicket, status: Status, username: String) {
-    ticket.status = status;
-    this.issueTicketService.changeStatus(ticket, username).subscribe({});
-  }
 
   constructor(
     private dialogRef: MatDialog,
-    issueTicketService: IssueTicketService,
-    isFormOpenService: isFormOpenService,
-    private tokenStorage: TokenStorageService
-  ) {
-    var temp = tokenStorage.getUsername();
-    if (temp) {
-      this.username = temp;
+    private issueTicketService: IssueTicketService,
+    private isFormOpenService: isFormOpenService
+  ) {}
+
+  drop(event: CdkDragDrop<IssueTicket[]>) {
+    transferArrayItem(
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex
+    );
+    var splitId = event.container.id.split('-');
+    var idIdx = splitId.length - 1;
+    var id = parseInt(splitId[idIdx]);
+    id = id % 4;
+    switch (id) {
+      case 0:
+        this.changeStatus(event.container.data[0], Status.todo);
+        break;
+      case 1:
+        this.changeStatus(event.container.data[0], Status.inprogress);
+        break;
+      case 2:
+        this.changeStatus(event.container.data[0], Status.review);
+        break;
+      case 3:
+        this.changeStatus(event.container.data[0], Status.done);
+        break;
     }
-    this.issueTicketService = issueTicketService;
-    this.isFormOpenService = isFormOpenService;
+  }
+
+  changeStatus(ticket: IssueTicket, status: Status) {
+    ticket.status = status;
+    this.issueTicketService.changeTicket(ticket).subscribe({
+      error: (error) => console.log(error),
+    });
   }
 
   ngOnChanges() {
@@ -103,7 +70,6 @@ export class DropListComponent {
       return;
     }
     this.allIssues.forEach((issue) => {
-      this.issueTicketService.changeTicket(issue);
       switch (issue.status) {
         case Status.todo:
           this.todo.push(issue);

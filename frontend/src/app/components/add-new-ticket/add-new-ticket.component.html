@@ -1,4 +1,4 @@
-<form #itemForm="ngForm" class="example-form">
+<form class="example-form">
   <p>New Ticket</p>
 
   <mat-form-field class="form-field" id="first">
@@ -72,5 +72,5 @@
   >
     Save Ticket
   </button>
-  <button id="btnCancel" matDialogClose>Cancel</button>
+  <button id="btnCancel" (click)="closeDialog()">Cancel</button>
 </form>

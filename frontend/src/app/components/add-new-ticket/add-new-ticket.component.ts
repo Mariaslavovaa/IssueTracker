@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IssueTicket, Status } from 'src/app/models/issue-ticket-model';
+import { isFormOpenService } from 'src/app/service/is-form-open-service';
 import { IssueTicketService } from 'src/app/service/issues-service';
 import { TokenStorageService } from 'src/app/service/token-service.service';
 
@@ -21,11 +22,11 @@ export class AddNewTicketComponent {
   );
   date: Date = new Date();
   username: String = '';
-  private issueTicketService: IssueTicketService;
 
   constructor(
     private tokenStorage: TokenStorageService,
-    issueTicketService: IssueTicketService
+    private issueTicketService: IssueTicketService,
+    private isFormOpenService: isFormOpenService
   ) {
     this.issueTicketService = issueTicketService;
     var temp = tokenStorage.getUsername();
@@ -50,5 +51,9 @@ export class AddNewTicketComponent {
       this.ticket.assignedTo.length > 0 &&
       this.ticket.projectTitle.length > 0
     );
+  }
+  closeDialog() {
+    this.isFormOpenService.openForm(false);
+    window.location.reload();
   }
 }
