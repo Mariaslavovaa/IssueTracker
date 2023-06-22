@@ -22,18 +22,18 @@ export class AssigneeIssuesComponent {
     this.UserService.getAllUsers().subscribe({
       next: (users) => {
         this.users = users;
-        this.users.forEach(user => {
-          ticketService.getAllTicketsCurrUser(user.username).subscribe(response =>{
-            if(response){
-              console.log(response)
-              user.allIssues = response;
-            }
-          })
-        })
-      }
-    })
-
-    
+        this.users.forEach((user) => {
+          ticketService
+            .getAllTicketsCurrUser(user.username)
+            .subscribe((response) => {
+              if (response) {
+                console.log(response);
+                user.allIssues = response;
+              }
+            });
+        });
+      },
+    });
   }
 
   ngOnInit() {

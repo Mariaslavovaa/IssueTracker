@@ -5,7 +5,6 @@ import { TokenStorageService } from 'src/app/service/token-service.service';
 import { AddNewTicketComponent } from '../../add-new-ticket/add-new-ticket.component';
 import { AddNewProjectComponent } from '../../add-new-project/add-new-project.component';
 
-
 @Component({
   selector: 'nav-bar',
   templateUrl: './nav-bar.component.html',

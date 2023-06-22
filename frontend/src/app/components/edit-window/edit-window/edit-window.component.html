@@ -11,6 +11,9 @@
       value="{{ ticket.title }}"
       ngModel
     />
+    <mat-hint *ngIf="ticket.title.length === 0">
+      {{ DisplayError() }}
+    </mat-hint>
     <mat-hint align="end">{{ inputTitle.value.length }}/50</mat-hint>
   </mat-form-field>
 
@@ -61,7 +64,12 @@
     >Date of creation:
     {{ ticket.dateOfCreation.toLocaleString("en-GB") }}</label
   >
-  <button id="btnSave" (click)="saveTicket()" (click)="closeDialog()">
+  <button
+    id="btnSave"
+    [disabled]="!IsValidForm()"
+    (click)="saveTicket()"
+    (click)="closeDialog()"
+  >
     Save Changes
   </button>
   <button id="btnDel" (click)="deleteTicket()" (click)="closeDialog()">

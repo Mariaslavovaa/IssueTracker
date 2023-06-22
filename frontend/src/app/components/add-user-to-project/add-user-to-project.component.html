@@ -1,0 +1,18 @@
+<form #itemForm="ngForm" class="example-form">
+  <p class="title">Grant Access</p>
+  <mat-form-field class="form-field" id="first">
+    <input
+      matInput
+      #inputUsername
+      maxlength="50"
+      placeholder="Enter username"
+      name="username"
+      [(ngModel)]="username"
+      ngModel
+    />
+    <mat-hint align="end">{{ inputUsername.value.length }}/50</mat-hint>
+  </mat-form-field>
+
+  <button id="btnSave" (click)="saveAccess()" matDialogClose>Save</button>
+  <button id="btnCancel" matDialogClose>Cancel</button>
+</form>

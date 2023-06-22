@@ -11,8 +11,11 @@ p {
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   border-radius: 7px;
   border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  justify-content: space-evenly;
 }
 
-.deleteButton{ /*Не работи, не знам защо*/
+.deleteButton {
+  /*Не работи, не знам защо*/
   left: 55%;
 }

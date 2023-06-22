@@ -11,7 +11,12 @@ export class UserService {
   constructor(private http: HttpClient) {}
 
   getAllUsers() {
-    const url = `${environment.restApi}/users/all`; // ??
+    const url = `${environment.restApi}/users/all`;
     return this.http.get<User[]>(url);
+  }
+
+  getUserByUsername(username: String) {
+    const url = `${environment.restApi}/users/${username}`;
+    return this.http.get<User>(url);
   }
 }

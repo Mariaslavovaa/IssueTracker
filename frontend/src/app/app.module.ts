@@ -30,6 +30,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddNewTicketComponent } from './components/add-new-ticket/add-new-ticket.component';
 import { AddNewProjectComponent } from './components/add-new-project/add-new-project.component';
+import { AddUserToProjectComponent } from './components/add-user-to-project/add-user-to-project.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { AddNewProjectComponent } from './components/add-new-project/add-new-pro
     SignupComponent,
     AddNewTicketComponent,
     AddNewProjectComponent,
+    AddUserToProjectComponent,
   ],
   imports: [
     BrowserModule,

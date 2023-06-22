@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'all-issues',
+    redirectTo: 'signup',
   },
   { path: 'all-issues', component: AllIssuesComponent },
   { path: 'assignee-issues', component: AssigneeIssuesComponent },

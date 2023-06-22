@@ -1,0 +1,55 @@
+form {
+  position: fixed !important;
+  width: 50%;
+  height: 50%;
+  top: 15%;
+  left: 15%;
+  background-color: white;
+  margin: 0 auto;
+  font-size: 25px;
+  font-family: Raleway;
+  font-weight: 600;
+  text-align: left;
+  color: rgba(30, 29, 29, 0.87);
+  box-sizing: border-box;
+  background: rgb(165, 213, 245);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-content: flex-start;
+}
+
+mat-form-field,
+input {
+  margin-left: 3%;
+  width: 400px;
+}
+
+button {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  border-radius: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  width: 150px;
+  height: 50px;
+  font-size: 20px;
+}
+
+#btnCancel {
+  right: 25%;
+}
+
+p.title {
+  margin-left: 3%;
+}
+p {
+  margin-left: 10%;
+}
