@@ -44,4 +44,13 @@ export class ProjectsIssuesComponent {
       window.location.reload();
     });
   }
+
+  addUser(title: string){
+    //TODO @DARI to integrate with the modal
+    // this.ProjectService.allowAccess(username, title).subscribe(response => {
+    //   if(response){
+    //     console.log("success")
+    //   }
+    // })
+  }
 }

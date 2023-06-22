@@ -34,4 +34,8 @@ export class ProjectService {
     return this.http.get<IssueTicket[]>(`${environment.restApi}/private/api/projects/issues/${project.title}`)
   }
 
+  allowAccess(username: string, title: string) : Observable<Project>{
+    return this.http.post<Project>(`${environment.restApi}/private/api/projects/${title}/users`, {username: username})
+  }
+
 }
