@@ -47,6 +47,8 @@ export class SignupComponent {
       error: (err) => {
         if (err && err.error) {
           this.errorMessage=err.error;
+        } else {
+          this.errorMessage="Unknown error";
         }
       }
     })

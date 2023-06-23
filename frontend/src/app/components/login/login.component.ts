@@ -41,6 +41,8 @@ export class LoginComponent implements OnInit {
       error: err => {
         if (err && err.error && err.error.message) {
           this.errorMessage = err.error.message;
+        } else {
+          this.errorMessage = "Invalid credentials";
         }
       }
     })

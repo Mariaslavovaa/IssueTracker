@@ -30,12 +30,12 @@ public class AuthController {
     private final JwtTokenGenerator jwtGenerator;
 
     @PostMapping("/signup")
-    public ResponseEntity<User> signupSave(@RequestBody SignupRequest signupRequest) {
+    public ResponseEntity<?> signupSave(@RequestBody SignupRequest signupRequest) {
         User newUser = new User(signupRequest.getUsername(), signupRequest.getEmail(), signupRequest.getPassword());
         try {
             userService.createUser(newUser);
         } catch (IllegalArgumentException ex) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(ex.getMessage());
         }
         return ResponseEntity.ok().body(newUser);
     }
